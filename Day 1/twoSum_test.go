@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-//Тест для функции "twoSum"
+// TestTwoSum является тестом для функции twoSum
 func TestTwoSum(t *testing.T) {
 	numbers := []int{1, 2, 3, 4, 5}
 
