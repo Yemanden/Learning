@@ -1,4 +1,4 @@
-package Question5
+package parentheses
 
 // Parentheses checks the validity of a string of brackets.
 // Returns a bool type
