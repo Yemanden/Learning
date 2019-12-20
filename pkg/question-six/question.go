@@ -7,9 +7,9 @@ type ListNode struct {
 }
 
 // HasCycle checks the loop in a linked list
-func HasCycle(head *ListNode) bool {
-	Slow := head
-	Fast := head
+func HasCycle(h *ListNode) bool {
+	Slow := h
+	Fast := h
 	for true {
 		if Fast.Next == nil || Fast.Next.Next == nil {
 			return false

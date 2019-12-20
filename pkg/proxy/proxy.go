@@ -11,28 +11,28 @@ type Proxy struct {
 }
 
 // SetData sets a value for realObject data
-func (obj *Proxy) SetData(i int) {
-	subject := obj.getRealObject()
+func (p *Proxy) SetData(i int) {
+	subject := p.getRealObject()
 	subject.setData(i)
 }
 
-func (obj *realSubject) setData(i int) {
-	obj.data = i
+func (s *realSubject) setData(i int) {
+	s.data = i
 }
 
 // GetData returns data of realObject
-func (obj *Proxy) GetData() int {
-	subject := obj.getRealObject()
+func (p *Proxy) GetData() int {
+	subject := p.getRealObject()
 	return subject.getData()
 }
 
-func (obj *realSubject) getData() int {
-	return obj.data
+func (s *realSubject) getData() int {
+	return s.data
 }
 
-func (obj *Proxy) getRealObject() *realSubject {
-	if obj.object == nil {
-		obj.object = &realSubject{}
+func (p *Proxy) getRealObject() *realSubject {
+	if p.object == nil {
+		p.object = &realSubject{}
 	}
-	return obj.object
+	return p.object
 }
