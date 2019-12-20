@@ -1,4 +1,4 @@
-package Merge_Sorted_Array
+package merge_sorted_array
 
 import (
 	"testing"

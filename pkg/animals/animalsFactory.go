@@ -1,4 +1,4 @@
-package Animals
+package animals
 
 // NewCreator returns a new object of creator struct
 func NewCreator() *creator {
@@ -11,8 +11,8 @@ type creator struct {
 
 // Create takes the name of the structure to create.
 // Returns a new object implements interface iAnimal
-func (c *creator) Create(name string) iAnimal {
-	var anim iAnimal
+func (c *creator) Create(name string) Animaler {
+	var anim Animaler
 	switch name {
 	case "Cat":
 		{

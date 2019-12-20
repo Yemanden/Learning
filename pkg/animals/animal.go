@@ -1,9 +1,9 @@
-package Animals
+package animals
 
 import "fmt"
 
 // Interface describing the behavior of all animals
-type iAnimal interface {
+type Animaler interface {
 	Voice()
 	SetData(string, string, int)
 	GetAge() int
@@ -11,10 +11,9 @@ type iAnimal interface {
 
 // Structure contained the data of all animals
 type animal struct {
-	Name  string
-	Color string
-	Age   int
-	iAnimal
+	Name, Color string
+	Age         int
+	Animaler
 }
 
 // Structure contained the data of cats
@@ -33,33 +32,33 @@ type dog struct {
 }
 
 // SetData arguments is name, color and age of animal. Sets data, describes in struct animal
-func (obj *animal) SetData(name string, color string, age int) {
-	obj.Name = name
-	obj.Color = color
-	obj.Age = age
+func (a *animal) SetData(name string, color string, age int) {
+	a.Name = name
+	a.Color = color
+	a.Age = age
 }
 
 // GetAge return Age of this animal
-func (obj *animal) GetAge() int {
-	return obj.Age
+func (a *animal) GetAge() int {
+	return a.Age
 }
 
 // Voice is default method for all animals
-func (obj *animal) Voice() {
+func (a *animal) Voice() {
 	fmt.Println("animals sound")
 }
 
 // Voice displays a "Meow"
-func (obj *cat) Voice() {
+func (c *cat) Voice() {
 	fmt.Println("Meow")
 }
 
 // Voice displays a "Woof woof"
-func (obj *dog) Voice() {
+func (d *dog) Voice() {
 	fmt.Println("Woof woof")
 }
 
 // Voice displays a "Quack quack"
-func (obj *duck) Voice() {
+func (d *duck) Voice() {
 	fmt.Println("Quack quack")
 }
