@@ -1,12 +1,11 @@
-package Worker
+package worker
 
 import (
 	"math/rand"
 	"time"
 )
 
-// Work принимает количество работников и возвращает отчёт о проделанной ими работе
-// В данном контексте работа - возведение в квадрат случайного числа от -10 до 10
+// Work creates Task for workerCount workers, sends them to work and returns Work Report.
 func Work(workerCount uint) []int {
 	tasks := make(chan int, workerCount)
 	results := make(chan int, workerCount)

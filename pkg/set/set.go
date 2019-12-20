@@ -1,4 +1,4 @@
-package Set
+package set
 
 import "sync"
 
@@ -7,12 +7,12 @@ type set struct {
 	data []int
 }
 
-// GetValues возвращает значения элементов Множества
+// GetValues returns values of the data contained in this Set
 func (s *set) GetValues() []int {
 	return s.data
 }
 
-// CreateSet создаёт и возвращает Множество с задаными значениями numbers (лишние значения отсеются)
+// CreateSet creates and returns Set with sets value of numbers
 func CreateSet(numbers ...int) *set {
 	var newS set
 
@@ -23,8 +23,6 @@ func CreateSet(numbers ...int) *set {
 	return &newS
 }
 
-// Поиск элемента в множестве, возвращает индекс элемента и true, если найдено,
-// иначе возвращает 0 и false.
 func (s *set) find(elem int) (int, bool) {
 	for i, item := range s.data {
 		if item == elem {
@@ -34,7 +32,7 @@ func (s *set) find(elem int) (int, bool) {
 	return 0, false
 }
 
-// Add добавляет элемент во Множество
+// Add appends elem in Set s
 func (s *set) Add(elem int) {
 	_, ok := s.find(elem)
 	if !ok {
@@ -44,7 +42,8 @@ func (s *set) Add(elem int) {
 	}
 }
 
-// Remove удаляет заданный элемент из Множества и возвращает true, иначе false
+// Remove deletes elem from Set s.
+// Returns true, if delete is successfully, else return false
 func (s *set) Remove(elem int) bool {
 	i, ok := s.find(elem)
 	if ok {
@@ -56,7 +55,8 @@ func (s *set) Remove(elem int) bool {
 	return false
 }
 
-// Union объединяет два Множества и возвращает результат объединения
+// Union unites two Sets s1 and s2.
+// Returns new Set
 func Union(s1 *set, s2 *set) *set {
 	var newS set
 
@@ -70,8 +70,7 @@ func Union(s1 *set, s2 *set) *set {
 	return &newS
 }
 
-// Difference возвращает Множество, состоящее из элементов
-// множества s1, которых нет в множестве s2
+// Difference returns new Set, contains elements of the s1, absent in the s2.
 func Difference(s1 *set, s2 *set) *set {
 	var newS set
 
@@ -85,8 +84,7 @@ func Difference(s1 *set, s2 *set) *set {
 	return &newS
 }
 
-// Intersection возвращает новое Множество, состоящее из общих элементов
-// Множеств s1 и s2
+// Intersection returns new Set, containing common elements of a s1 and a s2.
 func Intersection(s1 *set, s2 *set) *set {
 	var newS set
 
@@ -99,8 +97,8 @@ func Intersection(s1 *set, s2 *set) *set {
 	return &newS
 }
 
-// Subset проверяет является ли множество s1 подмножеством s2.
-// Возвращает true, если является и false, если нет.
+// Subset checks if a s1 is a subset s2.
+// Returns boolean.
 func Subset(s1 *set, s2 *set) bool {
 	for _, item := range s1.data {
 		_, ok := s2.find(item)

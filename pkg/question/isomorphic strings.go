@@ -1,4 +1,4 @@
-package Question
+package question_two
 
 //Функция, проверяющая изоморфность двух строк
 func Isomorphic(s1 string, s2 string) bool {

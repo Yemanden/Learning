@@ -1,4 +1,4 @@
-package Day_1
+package question_one
 
 // Метод для нахождения индексов двух элементов массива nums,
 // сумма которых равна target
