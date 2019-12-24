@@ -1,58 +1,35 @@
 package chain_of_resp
 
 import (
-	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func TestChainLink_Append(t *testing.T) {
-	var handler HandlerA
-	var chain ChainLink
-	chain.Append(handler)
+const (
+	TestChainPass1Name  = "Three handlers"
+	TestChainPass1Input = "input"
+	TestChainPass1Want  = "input HandlerA HandlerA HandlerB"
+	TestChainPass2Name  = "Two handlers"
+	TestChainPass2Input = "input"
+	TestChainPass2Want  = "input HandlerA HandlerB"
+)
 
-	got := *chain.current
-	want := handler
+func TestChain(t *testing.T) {
+	t.Run(TestChainPass1Name, func(t *testing.T) {
+		chain := NewHandlerA(NewHandlerA(NewHandlerB(nil)))
 
-	if got != want {
-		fmt.Printf("%s: got [%v] want [%v]", "Append: ", got, want)
-	}
-}
+		got := chain.Handle(TestChainPass1Input)
+		want := TestChainPass1Want
 
-func TestChainLink_Request(t *testing.T) {
-	var a HandlerA
-	var chain ChainLink
-
-	t.Run("Without handler", func(t *testing.T) {
-		chain.Request("Without handler")
+		assert.EqualValues(t, got, want)
 	})
 
-	chain = ChainLink{}
-	t.Run("One handler", func(t *testing.T) {
-		chain.Append(a)
-		chain.Request("One handler")
-	})
+	t.Run(TestChainPass2Name, func(t *testing.T) {
+		chain := NewHandlerA(NewHandlerB(nil))
 
-	chain = ChainLink{}
-	t.Run("Two handler", func(t *testing.T) {
-		chain.Append(a)
-		chain.Append(a)
-		chain.Request("Two handler")
-	})
+		got := chain.Handle(TestChainPass2Input)
+		want := TestChainPass2Want
 
-	chain = ChainLink{}
-	t.Run("Three handler", func(t *testing.T) {
-		chain.Append(a)
-		chain.Append(a)
-		chain.Append(a)
-		chain.Request("Three handler")
+		assert.EqualValues(t, got, want)
 	})
-	chain = ChainLink{}
-	t.Run("One handler + one chain", func(t *testing.T) {
-		chain.Append(a)
-		var chain2 ChainLink
-		chain2.Append(a)
-		chain.Append(chain2)
-		chain.Request("One handler + one chain")
-	})
-
 }
