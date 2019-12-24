@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// Worker is interface, contains Work method.
 type Worker interface {
 	Work(context.Context, uint)
 }
@@ -14,6 +15,7 @@ type Worker interface {
 type foreman struct {
 }
 
+// NewForeman is constructor, returns "foreman" object that implements the interface Worker
 func NewForeman() Worker {
 	return new(foreman)
 }
@@ -40,7 +42,7 @@ func workerUsing(ctx context.Context, report chan<- int) {
 
 // Work generates "workerCount" workers to complete the task. Who is faster
 func (f *foreman) Work(ctx context.Context, workerCount uint) {
-	task := rand.Intn(20) - 10
+	var task = 33
 	cnlCtx, cancel := context.WithCancel(ctx)
 	defer cancel()
 

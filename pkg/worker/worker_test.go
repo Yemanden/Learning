@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	BenchmarkWorkTest1Name  = "One workers"
+	BenchmarkWorkTest1Name  = "One worker"
 	BenchmarkWorkTest1Input = 1
 	BenchmarkWorkTest2Name  = "Two workers"
 	BenchmarkWorkTest2Input = 2
