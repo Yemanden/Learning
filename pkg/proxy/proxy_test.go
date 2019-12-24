@@ -1,36 +1,25 @@
 package proxy
 
 import (
-	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
-func TestProxy_SetData(t *testing.T) {
-	value := []int{1, 4, 7, 10, 123, 55}
+const (
+	TestSetGetDataName = "SetGetData"
+)
 
-	for _, v := range value {
-		prox := Proxy{}
-		prox.SetData(v)
-		got := prox.object.data
-		want := v
+func TestSetGetData(t *testing.T) {
+	t.Run(TestSetGetDataName, func(t *testing.T) {
+		value := []int{1, 4, 7, 10, 123, 55}
 
-		if got != want {
-			fmt.Printf("%s: got [%v] want [%v]", "SetData", got, want)
+		for _, v := range value {
+			proxy := NewProxy()
+			proxy.SetData(v)
+			got := proxy.GetData()
+			want := v
+
+			assert.EqualValues(t, got, want)
 		}
-	}
-}
-
-func TestProxy_GetData(t *testing.T) {
-	value := []int{1, 4, 7, 10, 123, 55}
-
-	for _, v := range value {
-		prox := Proxy{}
-		prox.SetData(v)
-		got := prox.GetData()
-		want := v
-
-		if got != want {
-			fmt.Printf("%s: got [%v] want [%v]", "GetData", got, want)
-		}
-	}
+	})
 }

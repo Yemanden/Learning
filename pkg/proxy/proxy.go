@@ -1,38 +1,34 @@
 package proxy
 
-// realObject is a real object
-type realSubject struct {
-	data int
+type Proxy interface {
+	SetData(int)
+	GetData() int
 }
 
 // Proxy contains reference on a realObject
-type Proxy struct {
-	object *realSubject
+type proxy struct {
+	object Proxy
 }
 
 // SetData sets a value for realObject data
-func (p *Proxy) SetData(i int) {
+func (p *proxy) SetData(i int) {
 	subject := p.getRealObject()
-	subject.setData(i)
-}
-
-func (s *realSubject) setData(i int) {
-	s.data = i
+	subject.SetData(i)
 }
 
 // GetData returns data of realObject
-func (p *Proxy) GetData() int {
+func (p *proxy) GetData() int {
 	subject := p.getRealObject()
-	return subject.getData()
+	return subject.GetData()
 }
 
-func (s *realSubject) getData() int {
-	return s.data
-}
-
-func (p *Proxy) getRealObject() *realSubject {
+func (p *proxy) getRealObject() Proxy {
 	if p.object == nil {
-		p.object = &realSubject{}
+		p.object = newRealObject()
 	}
 	return p.object
+}
+
+func NewProxy() Proxy {
+	return &proxy{}
 }

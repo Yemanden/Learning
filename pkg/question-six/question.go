@@ -1,21 +1,21 @@
 package question_six
 
-// ListNode is structure of singly linked list
-type ListNode struct {
+// listNode is structure of singly linked list
+type listNode struct {
 	Data int
-	Next *ListNode
+	next *listNode
 }
 
 // HasCycle checks the loop in a linked list
-func HasCycle(h *ListNode) bool {
+func HasCycle(h *listNode) bool {
 	Slow := h
 	Fast := h
-	for true {
-		if Fast.Next == nil || Fast.Next.Next == nil {
+	for {
+		if Fast.next == nil || Fast.next.next == nil {
 			return false
 		}
-		Slow = Slow.Next
-		Fast = Fast.Next.Next
+		Slow = Slow.next
+		Fast = Fast.next.next
 
 		if Slow == Fast {
 			return true
