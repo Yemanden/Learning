@@ -1,55 +1,33 @@
 package mediator
 
-import "fmt"
-
 // Sender is interface for Mediator
-type Sender interface {
-	send(string)
+type Mediator interface {
+	send(string) string
+	SetPerformers(*Performer, *Performer)
 }
 
-type performer interface {
-	Perform(string)
-	receive(string)
+// ConcreteMediator is structure of concrete Mediator
+type ConcreteMediator struct {
+	Englishman, Russian Performer
 }
 
-// Translator is structure of concrete Mediator
-type Translator struct {
-	Englishman, Russian performer
-}
-
-func (t *Translator) send(s string) {
-	if s == "Hello!" && t.Russian != nil {
-		t.Russian.receive("С учётом погрешности: Здарова!")
+func (p *ConcreteMediator) send(s string) string {
+	if s == "Hello!" && p.Russian != nil {
+		return p.Russian.receive("С учётом погрешности: Здарова!")
 	}
-	if s == "Добрый вечер!" && t.Englishman != nil {
-		t.Englishman.receive("Given the error: Zdarova!")
+	if s == "Добрый вечер!" && p.Englishman != nil {
+		return p.Englishman.receive("Given the error: Zdarova!")
 	}
+	return "Ja ja, naturlich!"
 }
 
-// PerformerA is concrete Performer
-type PerformerA struct {
-	Mediator *Translator
+// SetPerformers sets new Performers in Mediator
+func (p *ConcreteMediator) SetPerformers(p1, p2 *Performer) {
+	p.Englishman = *p1
+	p.Russian = *p2
 }
 
-// Perform sends message to Mediator
-func (p *PerformerA) Perform(msg string) {
-	p.Mediator.send(msg)
-}
-
-func (p *PerformerA) receive(s string) {
-	fmt.Println(s)
-}
-
-// PerformerB is concrete Performer
-type PerformerB struct {
-	Mediator *Translator
-}
-
-// Perform sends message to Mediator
-func (p *PerformerB) Perform(msg string) {
-	p.Mediator.send(msg)
-}
-
-func (p *PerformerB) receive(s string) {
-	fmt.Println(s)
+// NewConcreteMediator creates and returns a new object of ConcreteMediator
+func NewConcreteMediator() Mediator {
+	return &ConcreteMediator{}
 }

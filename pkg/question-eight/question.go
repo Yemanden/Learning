@@ -1,25 +1,25 @@
 package question_eight
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+type treeNode struct {
+	val   int
+	left  *treeNode
+	right *treeNode
 }
 
-func rangeSumBST(root *TreeNode, L int, R int) int {
+func rangeSumBST(root *treeNode, L int, R int) int {
 	var sum int
 	if root == nil {
 		return sum
 	}
 
-	if root.Val >= L && root.Val <= R {
-		sum += root.Val
+	if root.val >= L && root.val <= R {
+		sum += root.val
 	}
-	if root.Val > L {
-		sum += rangeSumBST(root.Left, L, R)
+	if root.val > L {
+		sum += rangeSumBST(root.left, L, R)
 	}
-	if root.Val <= R {
-		sum += rangeSumBST(root.Right, L, R)
+	if root.val <= R {
+		sum += rangeSumBST(root.right, L, R)
 	}
 	return sum
 }
