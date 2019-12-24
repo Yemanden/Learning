@@ -1,54 +1,56 @@
 package singleton
 
 import (
-	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
+const (
+	TestGetInstanceName = "GetInstance"
+	TestAddName         = "Add"
+	TestGetDataName     = "GetData"
+)
+
 func TestGetInstance(t *testing.T) {
+	t.Run(TestGetInstanceName, func(t *testing.T) {
+		got := GetInstance()
+		want := instance
 
-	got := GetInstance()
-	want := instance
-
-	if got != want {
-		fmt.Printf("%s: got [%v] want [%v]", "Instance", got, want)
-	}
+		assert.EqualValues(t, got, want)
+	})
 }
 
-func TestSingleton_Add(t *testing.T) {
+func TestAdd(t *testing.T) {
+	t.Run(TestAddName, func(t *testing.T) {
+		testVariables := []int{-500, 1, 3, 5, 7, 10, 1567}
+		for _, v := range testVariables {
+			instance = &singleton{}
+			instance.data = 0
 
-	testVariables := []int{-500, 1, 3, 5, 7, 10, 1567}
+			single := GetInstance()
+			single.Add(v)
 
-	for _, v := range testVariables {
-		instance.data = 0
+			got := instance.data
+			want := v
 
-		single := GetInstance()
-		single.Add(v)
-		got := single.data
-
-		want := v
-
-		if got != want {
-			fmt.Printf("%s: got [%v] want [%v] \n", "Add", got, want)
+			assert.EqualValues(t, got, want)
 		}
-	}
+	})
 }
 
-func TestSingleton_GetData(t *testing.T) {
+func TestGetData(t *testing.T) {
+	t.Run(TestGetDataName, func(t *testing.T) {
+		testVariables := []int{-500, 1, 3, 5, 7, 10, 1567}
+		for v := range testVariables {
+			instance = &singleton{}
+			instance.data = v
 
-	testVariables := []int{-500, 1, 3, 5, 7, 10, 1567}
+			single := GetInstance()
+			got := single.GetData()
 
-	for v := range testVariables {
-		instance.data = 0
+			want := v
 
-		single := GetInstance()
-		single.Add(v)
-		got := single.GetData()
-
-		want := v
-
-		if got != want {
-			fmt.Printf("%s: got [%v] want [%v]\n", "GetData", got, want)
+			assert.EqualValues(t, got, want)
 		}
-	}
+	})
 }
