@@ -7,6 +7,7 @@ type Proxy interface {
 
 // Proxy contains reference on a realObject
 type proxy struct {
+	data   int
 	object Proxy
 }
 
@@ -19,7 +20,10 @@ func (p *proxy) SetData(i int) {
 // GetData returns data of realObject
 func (p *proxy) GetData() int {
 	subject := p.getRealObject()
-	return subject.GetData()
+	if p.data == 0 {
+		return subject.GetData()
+	}
+	return p.data
 }
 
 func (p *proxy) getRealObject() Proxy {
