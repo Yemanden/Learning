@@ -1,68 +1,78 @@
 package animals
 
 import (
-	"fmt"
+	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
+const (
+	TestNewCreatorName    = "NewCreator"
+	TestCreatePass1Name   = "Create Cat"
+	TestCreatePass2Name   = "Create Dog"
+	TestCreatePass3Name   = "Create Duck"
+	TestGetDataPass1Name  = "GetData Cat"
+	TestGetDataPass1Input = "Murka"
+	TestGetDataPass2Name  = "GetData Dog"
+	TestGetDataPass2Input = "Sharik"
+	TestGetDataPass3Name  = "GetData Duck"
+	TestGetDataPass3Input = "GaGa"
+)
+
 func TestNewCreator(t *testing.T) {
-	got := NewCreator()
-	want := &creator{}
+	t.Run(TestNewCreatorName, func(t *testing.T) {
+		got := NewCreator()
+		want := &creator{}
 
-	if got != want {
-		fmt.Printf("%s: got [%v] want [%v]", "NewCreator", got, want)
-	}
+		assert.EqualValues(t, got, want)
+	})
 }
 
-func TestCreator_Create(t *testing.T) {
+func TestCreate(t *testing.T) {
 
-	t.Run("dog", func(t *testing.T) {
-		temp := NewCreator().Create("Dog")
-		temp.SetData("name", "black", 3)
+	t.Run(TestCreatePass1Name, func(t *testing.T) {
+		got := NewCreator().Create("Cat")
+		want := &cat{}
 
-		got := temp.GetAge()
-		want := 3
-
-		if got != want {
-			fmt.Printf("%s: got [%v] want [%v]", "Create Dog", got, want)
-		}
+		assert.EqualValues(t, got, want)
 	})
-	t.Run("Cat", func(t *testing.T) {
+	t.Run(TestCreatePass2Name, func(t *testing.T) {
+		got := NewCreator().Create("Dog")
+		want := &dog{}
+
+		assert.EqualValues(t, got, want)
+	})
+	t.Run(TestCreatePass3Name, func(t *testing.T) {
+		got := NewCreator().Create("Duck")
+		want := &duck{}
+
+		assert.EqualValues(t, got, want)
+	})
+}
+
+func TestGetData(t *testing.T) {
+
+	t.Run(TestGetDataPass1Name, func(t *testing.T) {
 		temp := NewCreator().Create("Cat")
-		temp.SetData("name", "black", 3)
+		temp.SetData(TestGetDataPass1Input, "", "", 0)
+		got, _, _, _ := temp.GetData()
+		want := TestGetDataPass1Input
 
-		got := temp.GetAge()
-		want := 3
-
-		if got != want {
-			fmt.Printf("%s: got [%v] want [%v]", "Create Cat", got, want)
-		}
+		assert.EqualValues(t, got, want)
 	})
-	t.Run("Duck", func(t *testing.T) {
+	t.Run(TestGetDataPass2Name, func(t *testing.T) {
+		temp := NewCreator().Create("Dog")
+		temp.SetData(TestGetDataPass2Input, "", "", 0)
+		got, _, _, _ := temp.GetData()
+		want := TestGetDataPass2Input
+
+		assert.EqualValues(t, got, want)
+	})
+	t.Run(TestGetDataPass3Name, func(t *testing.T) {
 		temp := NewCreator().Create("Duck")
-		temp.SetData("name", "black", 3)
+		temp.SetData(TestGetDataPass3Input, "", "", 0)
+		got, _, _, _ := temp.GetData()
+		want := TestGetDataPass3Input
 
-		got := temp.GetAge()
-		want := 3
-
-		if got != want {
-			fmt.Printf("%s: got [%v] want [%v]", "Create Duck", got, want)
-		}
+		assert.EqualValues(t, got, want)
 	})
-}
-
-func TestAnimal_Voice(t *testing.T) {
-	NewCreator().Create("animal").Voice()
-}
-
-func TestCat_Voice(t *testing.T) {
-	NewCreator().Create("Cat").Voice()
-}
-
-func TestDog_Voice(t *testing.T) {
-	NewCreator().Create("Dog").Voice()
-}
-
-func TestDuck_Voice(t *testing.T) {
-	NewCreator().Create("Duck").Voice()
 }

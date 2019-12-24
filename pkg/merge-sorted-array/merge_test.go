@@ -21,6 +21,6 @@ func BenchmarkMerge(b *testing.B) {
 		}
 
 		b.StartTimer()
-		Merge(nums1, Count, nums2, Count)
+		merge(nums1, Count, nums2, Count)
 	}
 }
