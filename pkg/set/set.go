@@ -2,10 +2,16 @@ package set
 
 import "sync"
 
+// Set is interface, contains methods
+// GetValue, Add, Remove, Union, Difference, Intersection, Subset
 type Set interface {
 	GetValues() map[int]bool
 	Add(int)
 	Remove(int) bool
+	Union(Set) Set
+	Difference(Set) Set
+	Intersection(Set) Set
+	Subset(Set) bool
 }
 
 type set struct {
@@ -40,12 +46,12 @@ func (s *set) Remove(elem int) bool {
 	return true
 }
 
-// Union unites two Sets s1 and s2.
+// Union unites two Sets this object and s2.
 // Returns new Set
-func Union(s1 Set, s2 Set) Set {
+func (s *set) Union(s2 Set) Set {
 	numbers := make([]int, 0)
 
-	for item, _ := range s1.GetValues() {
+	for item, _ := range s.data {
 		numbers = append(numbers, item)
 	}
 	for item, _ := range s2.GetValues() {
@@ -55,11 +61,11 @@ func Union(s1 Set, s2 Set) Set {
 	return NewSet(numbers...)
 }
 
-// Difference returns new Set, contains elements of the s1, absent in the s2.
-func Difference(s1 Set, s2 Set) Set {
+// Difference returns new Set, contains elements of the this object, absent in the s2.
+func (s *set) Difference(s2 Set) Set {
 	numbers := make([]int, 0)
 
-	for item, _ := range s1.GetValues() {
+	for item, _ := range s.data {
 		if !s2.GetValues()[item] {
 			numbers = append(numbers, item)
 		}
@@ -67,11 +73,11 @@ func Difference(s1 Set, s2 Set) Set {
 	return NewSet(numbers...)
 }
 
-// Intersection returns new Set, containing common elements of a s1 and a s2.
-func Intersection(s1 Set, s2 Set) Set {
+// Intersection returns new Set, containing common elements of a this object and a s2.
+func (s *set) Intersection(s2 Set) Set {
 	numbers := make([]int, 0)
 
-	for item, _ := range s1.GetValues() {
+	for item, _ := range s.data {
 		if s2.GetValues()[item] {
 			numbers = append(numbers, item)
 		}
@@ -79,10 +85,10 @@ func Intersection(s1 Set, s2 Set) Set {
 	return NewSet(numbers...)
 }
 
-// Subset checks if a s1 is a subset s2.
+// Subset checks if a this object is a subset s2.
 // Returns boolean.
-func Subset(s1 Set, s2 Set) bool {
-	for item, _ := range s1.GetValues() {
+func (s *set) Subset(s2 Set) bool {
+	for item, _ := range s.data {
 		if !s2.GetValues()[item] {
 			return false
 		}
