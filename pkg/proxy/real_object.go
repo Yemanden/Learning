@@ -1,20 +1,20 @@
 package proxy
 
 // realObject is a real object
-type realSubject struct {
+type realObject struct {
 	data int
 }
 
-// SetData sets data in realSubject s
-func (s *realSubject) SetData(i int) {
+// SetData sets data in realObject s
+func (s *realObject) SetData(i int) {
 	s.data = i
 }
 
-// GetData returns data from realSubject s
-func (s *realSubject) GetData() int {
+// GetData returns data from realObject s
+func (s *realObject) GetData() int {
 	return s.data
 }
 
 func newRealObject() Proxy {
-	return &realSubject{}
+	return &realObject{}
 }

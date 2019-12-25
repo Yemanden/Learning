@@ -1,5 +1,6 @@
 package proxy
 
+// Proxy is interface, contains methods SetData and GetData
 type Proxy interface {
 	SetData(int)
 	GetData() int
@@ -19,9 +20,9 @@ func (p *proxy) SetData(i int) {
 
 // GetData returns data of realObject
 func (p *proxy) GetData() int {
-	subject := p.getRealObject()
+	object := p.getRealObject()
 	if p.data == 0 {
-		return subject.GetData()
+		return object.GetData()
 	}
 	return p.data
 }
@@ -33,6 +34,7 @@ func (p *proxy) getRealObject() Proxy {
 	return p.object
 }
 
+// NewProxy is constructor. Returns a new object of proxy structure, implemented Proxy interface
 func NewProxy() Proxy {
 	return &proxy{}
 }
