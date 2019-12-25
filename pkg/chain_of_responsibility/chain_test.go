@@ -1,4 +1,4 @@
-package chain_of_resp
+package chainofresp
 
 import (
 	"github.com/stretchr/testify/assert"

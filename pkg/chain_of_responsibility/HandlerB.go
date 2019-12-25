@@ -1,11 +1,11 @@
-package chain_of_resp
+package chainofresp
 
-// HandlerA is example Handlers
+// HandlerB is example Handlers
 type handlerB struct {
 	next Handler
 }
 
-// Request is example of a Request method for Handlers
+// Handle is example of a Request method for Handlers
 func (h *handlerB) Handle(s string) string {
 	s = s + " HandlerB"
 
@@ -15,6 +15,7 @@ func (h *handlerB) Handle(s string) string {
 	return s
 }
 
+// NewHandlerA is constructor, returns a new object of handlerB structure
 func NewHandlerB(handler Handler) Handler {
 	return &handlerB{handler}
 }
