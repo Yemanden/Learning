@@ -6,12 +6,11 @@ type Mediator interface {
 	SetPerformers(*Performer, *Performer)
 }
 
-// ConcreteMediator is structure of concrete Mediator
-type ConcreteMediator struct {
+type concreteMediator struct {
 	Englishman, Russian Performer
 }
 
-func (p *ConcreteMediator) send(s string) string {
+func (p *concreteMediator) send(s string) string {
 	if s == "Hello!" && p.Russian != nil {
 		return p.Russian.receive("С учётом погрешности: Здарова!")
 	}
@@ -22,12 +21,12 @@ func (p *ConcreteMediator) send(s string) string {
 }
 
 // SetPerformers sets new Performers in Mediator
-func (p *ConcreteMediator) SetPerformers(p1, p2 *Performer) {
+func (p *concreteMediator) SetPerformers(p1, p2 *Performer) {
 	p.Englishman = *p1
 	p.Russian = *p2
 }
 
-// NewConcreteMediator creates and returns a new object of ConcreteMediator
+// NewConcreteMediator creates and returns a new object of concreteMediator
 func NewConcreteMediator() Mediator {
-	return &ConcreteMediator{}
+	return &concreteMediator{}
 }
