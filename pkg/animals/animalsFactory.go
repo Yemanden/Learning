@@ -1,15 +1,15 @@
 package animals
 
+// Creator is interface, contains method Create
 type Creator interface {
 	Create(string) Animal
 }
 
 // An empty structure that has a Create method
-type creator struct {
-}
+type creator struct{}
 
 // Create takes the name of the structure to create.
-// Returns a new object implements interface iAnimal
+// Returns a new object implements interface Animal
 func (c *creator) Create(name string) Animal {
 	var anim Animal
 	switch name {
