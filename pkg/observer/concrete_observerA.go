@@ -1,7 +1,6 @@
 package observer
 
-type concreteObserverA struct {
-}
+type concreteObserverA struct{}
 
 // Observe returns changed massage s, received from Publisher
 func (c *concreteObserverA) Observe(s string) string {
