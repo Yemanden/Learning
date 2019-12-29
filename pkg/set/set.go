@@ -11,7 +11,7 @@ type Set interface {
 	Union(Set) Set
 	Difference(Set) Set
 	Intersection(Set) Set
-	Subset(Set) bool
+	IsSubset(Set) bool
 }
 
 type set struct {
@@ -98,7 +98,7 @@ func (s *set) Intersection(s2 Set) Set {
 
 // Subset checks if a this object is a subset s2.
 // Returns boolean.
-func (s *set) Subset(s2 Set) bool {
+func (s *set) IsSubset(s2 Set) bool {
 	s.RLock()
 	defer s.RUnlock()
 	for item, _ := range s.data {
