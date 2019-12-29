@@ -21,73 +21,86 @@ type set struct {
 
 // GetValues returns values of the data contained in this Set
 func (s *set) GetValues() map[int]bool {
+	s.RLock()
+	defer s.RUnlock()
 	return s.data
 }
 
 // Add appends elem in Set s
 func (s *set) Add(elem int) {
+	s.Lock()
+	defer s.Unlock()
+	if s.data == nil {
+		s.data = make(map[int]bool)
+	}
 	if s.data[elem] {
 		return
 	}
-	s.RLock()
 	s.data[elem] = true
-	s.RUnlock()
 }
 
 // Remove deletes elem from Set s.
 // Returns true, if delete is successfully, else return false
 func (s *set) Remove(elem int) bool {
+	s.Lock()
+	defer s.Unlock()
 	if !s.data[elem] {
 		return false
 	}
-	s.RLock()
-	s.data[elem] = false
-	s.RUnlock()
+	delete(s.data, elem)
 	return true
 }
 
 // Union unites two Sets this object and s2.
 // Returns new Set
 func (s *set) Union(s2 Set) Set {
-	numbers := make([]int, 0)
+	newS := NewSet()
 
+	s.RLock()
 	for item, _ := range s.data {
-		numbers = append(numbers, item)
+		newS.Add(item)
 	}
+	s.RUnlock()
 	for item, _ := range s2.GetValues() {
-		numbers = append(numbers, item)
+		newS.Add(item)
 	}
 
-	return NewSet(numbers...)
+	return newS
 }
 
 // Difference returns new Set, contains elements of the this object, absent in the s2.
 func (s *set) Difference(s2 Set) Set {
-	numbers := make([]int, 0)
+	newS := NewSet()
 
+	s.RLock()
+	defer s.RUnlock()
 	for item, _ := range s.data {
 		if !s2.GetValues()[item] {
-			numbers = append(numbers, item)
+			newS.Add(item)
 		}
 	}
-	return NewSet(numbers...)
+	return newS
 }
 
 // Intersection returns new Set, containing common elements of a this object and a s2.
 func (s *set) Intersection(s2 Set) Set {
-	numbers := make([]int, 0)
+	newS := NewSet()
 
+	s.RLock()
+	defer s.RUnlock()
 	for item, _ := range s.data {
 		if s2.GetValues()[item] {
-			numbers = append(numbers, item)
+			newS.Add(item)
 		}
 	}
-	return NewSet(numbers...)
+	return newS
 }
 
 // Subset checks if a this object is a subset s2.
 // Returns boolean.
 func (s *set) Subset(s2 Set) bool {
+	s.RLock()
+	defer s.RUnlock()
 	for item, _ := range s.data {
 		if !s2.GetValues()[item] {
 			return false
@@ -96,15 +109,7 @@ func (s *set) Subset(s2 Set) bool {
 	return true
 }
 
-// NewSet creates and returns Set with sets value of numbers
-func NewSet(numbers ...int) Set {
-	var newS set
-
-	newS.data = make(map[int]bool)
-
-	for _, item := range numbers {
-		newS.Add(item)
-	}
-
-	return &newS
+// NewSet creates and returns a new Set
+func NewSet() Set {
+	return &set{}
 }

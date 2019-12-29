@@ -2,14 +2,14 @@ package question_two
 
 // Isomorpher is interface, contains method Isomorphic
 type Isomorpher interface {
-	Isomorphic(s1, s2 string) bool
+	IsIsomorphic(s1, s2 string) bool
 }
 
 type isomorpher struct{}
 
 // Isomorphic receives in parameters two strings, сhecks them for isomorphism
 // and returns bool value
-func (i *isomorpher) Isomorphic(s1, s2 string) bool {
+func (i *isomorpher) IsIsomorphic(s1, s2 string) bool {
 	m1 := make(map[string]string, len(s1))
 	m2 := make(map[string]string, len(s2))
 
