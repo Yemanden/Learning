@@ -14,15 +14,13 @@ type proxy struct {
 
 // SetData sets a value for realObject data
 func (p *proxy) SetData(i int) {
-	subject := p.getRealObject()
-	subject.SetData(i)
+	p.getRealObject().SetData(i)
 }
 
 // GetData returns data of realObject
 func (p *proxy) GetData() int {
-	object := p.getRealObject()
 	if p.data == 0 {
-		return object.GetData()
+		return p.getRealObject().GetData()
 	}
 	return p.data
 }

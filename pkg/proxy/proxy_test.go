@@ -13,11 +13,11 @@ func TestSetGetData(t *testing.T) {
 	t.Run(TestSetGetDataName, func(t *testing.T) {
 		value := []int{1, 4, 7, 10, 123, 55}
 
-		for _, v := range value {
+		for i := 0; i < len(value); i++ {
 			proxy := NewProxy()
-			proxy.SetData(v)
+			proxy.SetData(value[i])
 			got := proxy.GetData()
-			want := v
+			want := value[i]
 
 			assert.EqualValues(t, got, want)
 		}
