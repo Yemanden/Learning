@@ -9,7 +9,7 @@ type parenthesesValidator struct {
 	data map[string]string
 }
 
-// Parentheses checks the validity of a string of brackets.
+// Validation checks the validity of a string of brackets.
 // Returns a bool type
 func (v *parenthesesValidator) Validation(input string) bool {
 	stack := []string{}
@@ -28,12 +28,7 @@ func (v *parenthesesValidator) Validation(input string) bool {
 	return true
 }
 
-// NewValidator creates new object, implements Validator, fills and returns his.
+// NewValidator creates a new object, implements Validator, fills and returns his.
 func NewValidator() Validator {
-	obj := &parenthesesValidator{}
-	obj.data = make(map[string]string)
-	obj.data[")"] = "("
-	obj.data["}"] = "{"
-	obj.data["]"] = "["
-	return obj
+	return &parenthesesValidator{map[string]string{")": "(", "}": "{", "]": "["}}
 }

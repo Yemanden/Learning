@@ -2,13 +2,13 @@ package singleton
 
 import "sync"
 
-// Singleton is interface, contains methods Add and GetData
-type Singleton interface {
+// Singletoner is interface, contains methods Add and GetData
+type Singletoner interface {
 	Add(int)
 	GetData() int
 }
 
-// Singleton
+// singleton struct
 type singleton struct {
 	sync.RWMutex
 	data int
@@ -17,28 +17,27 @@ type singleton struct {
 // Global variable for singleton
 var instance *singleton
 
-// GetInstance returns Singleton object
-func GetInstance() Singleton {
+// GetInstance returns ours singleton or initialized his
+func GetInstance() Singletoner {
 	if instance == nil {
 		instance = &singleton{}
-		instance.RLock()
+		instance.Lock()
+		defer instance.Unlock()
 		instance.data = 0
-		instance.RUnlock()
 	}
 	return instance
 }
 
-// Add increases value of variable data in Singleton by i
+// Add increases value of data in singleton by i
 func (s *singleton) Add(i int) {
-	s.RLock()
+	s.Lock()
 	s.data += i
-	s.RUnlock()
+	s.Unlock()
 }
 
-// GetData returns value of data in Singleton
+// GetData returns value of data in singleton
 func (s *singleton) GetData() int {
 	s.RLock()
-	ret := s.data
-	s.RUnlock()
-	return ret
+	defer s.RUnlock()
+	return s.data
 }
