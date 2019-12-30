@@ -9,6 +9,7 @@ const (
 	TestChainPass1Name  = "Three handlers"
 	TestChainPass1Input = "input"
 	TestChainPass1Want  = "input HandlerA HandlerA HandlerB"
+
 	TestChainPass2Name  = "Two handlers"
 	TestChainPass2Input = "input"
 	TestChainPass2Want  = "input HandlerA HandlerB"

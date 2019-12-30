@@ -15,7 +15,7 @@ func (h *handlerB) Handle(s string) string {
 	return s
 }
 
-// NewHandlerA is constructor, returns a new object of handlerB structure
+// NewHandlerB is constructor, returns a new object of handlerB structure
 func NewHandlerB(handler Handler) Handler {
 	return &handlerB{handler}
 }
