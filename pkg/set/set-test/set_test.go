@@ -1,13 +1,15 @@
-package set
+package settest
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+
+	"github.com/Yemanden/Learning/pkg/set/set"
 )
 
 const (
 	testGetValueName = "GetValues"
-	testNewSetName   = "NewSet"
 
 	testAddPass1Name = "Add Missing"
 	testAddPass2Name = "Add Existing"
@@ -31,145 +33,143 @@ const (
 	testSubsetPass2Want = true
 )
 
+// TestGetValues ...
 func TestGetValues(t *testing.T) {
-	set := NewSet()
+	s := set.NewSet()
 	for i := 1; i < 10; i++ {
-		set.Add(i)
+		s.Add(i)
 	}
 
 	t.Run(testGetValueName, func(t *testing.T) {
-		got := set.GetValues()
+		got := s.GetValues()
 		want := map[int]bool{1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true}
 
 		assert.EqualValues(t, got, want)
 	})
 }
 
-func TestNewSet(t *testing.T) {
-	t.Run(testNewSetName, func(t *testing.T) {
-		got := NewSet()
-		want := &set{}
-
-		assert.EqualValues(t, got, want)
-	})
-}
-
+// TestAdd ...
 func TestAdd(t *testing.T) {
-	set := NewSet()
+	s := set.NewSet()
 	for i := 1; i < 10; i++ {
-		set.Add(i)
+		s.Add(i)
 	}
 
 	t.Run(testAddPass1Name, func(t *testing.T) {
-		set.Add(10)
-		got := set.GetValues()
+		s.Add(10)
+		got := s.GetValues()
 		want := map[int]bool{1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true, 10: true}
 
 		assert.EqualValues(t, got, want)
 	})
 
-	set = NewSet()
+	s = set.NewSet()
 	for i := 1; i < 10; i++ {
-		set.Add(i)
+		s.Add(i)
 	}
 
 	t.Run(testAddPass2Name, func(t *testing.T) {
-		set.Add(1)
-		got := set.GetValues()
+		s.Add(1)
+		got := s.GetValues()
 		want := map[int]bool{1: true, 2: true, 3: true, 4: true, 5: true, 6: true, 7: true, 8: true, 9: true}
 
 		assert.EqualValues(t, got, want)
 	})
 }
 
+// TestRemove ...
 func TestRemove(t *testing.T) {
-	set := NewSet()
+	s := set.NewSet()
 	for i := 1; i < 10; i++ {
-		set.Add(i)
+		s.Add(i)
 	}
 
 	t.Run(testRemovePass1Name, func(t *testing.T) {
-		got := set.Remove(10)
+		got := s.Remove(10)
 		want := testRemovePass1Want
 
 		assert.EqualValues(t, got, want)
 	})
 	t.Run(testRemovePass2Name, func(t *testing.T) {
-		got := set.Remove(1)
+		got := s.Remove(1)
 		want := testRemovePass2Want
 
 		assert.EqualValues(t, got, want)
 	})
 }
 
+// TestUnion ...
 func TestUnion(t *testing.T) {
-	set1 := NewSet()
-	set2 := NewSet()
+	s1 := set.NewSet()
+	s2 := set.NewSet()
 	for i := 1; i < 4; i++ {
-		set1.Add(i)
-		set2.Add(2 * i)
+		s1.Add(i)
+		s2.Add(2 * i)
 	}
 
 	t.Run(testUnionName, func(t *testing.T) {
-		got := set1.Union(set2).GetValues()
+		got := s1.Union(s2).GetValues()
 		want := map[int]bool{1: true, 2: true, 3: true, 4: true, 6: true}
 
 		assert.EqualValues(t, got, want)
 	})
 }
 
+// TestDifference ...
 func TestDifference(t *testing.T) {
-	set1 := NewSet()
-	set2 := NewSet()
+	s1 := set.NewSet()
+	s2 := set.NewSet()
 	for i := 1; i < 4; i++ {
-		set1.Add(i)
-		set2.Add(2 * i)
+		s1.Add(i)
+		s2.Add(2 * i)
 	}
 
 	t.Run(testDifferenceName, func(t *testing.T) {
-		got := set1.Difference(set2).GetValues()
+		got := s1.Difference(s2).GetValues()
 		want := map[int]bool{1: true, 3: true}
 
 		assert.EqualValues(t, got, want)
 	})
 }
 
+// TestIntersection ...
 func TestIntersection(t *testing.T) {
-	set1 := NewSet()
-	set2 := NewSet()
+	s1 := set.NewSet()
+	s2 := set.NewSet()
 	for i := 1; i < 4; i++ {
-		set1.Add(i)
-		set2.Add(2 * i)
+		s1.Add(i)
+		s2.Add(2 * i)
 	}
 
 	t.Run(testIntersectionName, func(t *testing.T) {
-		got := set1.Intersection(set2).GetValues()
+		got := s1.Intersection(s2).GetValues()
 		want := map[int]bool{2: true}
 
 		assert.EqualValues(t, got, want)
 	})
 }
 
+// TestSubset ...
 func TestSubset(t *testing.T) {
-	set1 := NewSet()
-	set2 := NewSet()
+	s1 := set.NewSet()
+	s2 := set.NewSet()
 	for i := 1; i < 4; i++ {
-		set1.Add(i)
-		set2.Add(2 * i)
+		s1.Add(i)
+		s2.Add(2 * i)
 	}
-	set3 := NewSet()
+	s3 := set.NewSet()
 	for i := 1; i < 10; i++ {
-		set3.Add(i)
+		s3.Add(i)
 	}
 
 	t.Run(testSubsetPass1Name, func(t *testing.T) {
-		got := set1.Subset(set2)
+		got := s1.IsSubset(s2)
 		want := testSubsetPass1Want
 
 		assert.EqualValues(t, got, want)
 	})
 	t.Run(testSubsetPass2Name, func(t *testing.T) {
-		got := set1.Subset(set3)
+		got := s1.IsSubset(s3)
 		want := testSubsetPass2Want
 
 		assert.EqualValues(t, got, want)

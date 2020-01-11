@@ -102,7 +102,7 @@ func (s *set) IsSubset(s2 Set) bool {
 	s.RLock()
 	defer s.RUnlock()
 	for item, _ := range s.data {
-		if !s2.GetValues()[item] {
+		if s2.GetValues()[item] == false {
 			return false
 		}
 	}

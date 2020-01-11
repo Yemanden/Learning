@@ -1,4 +1,4 @@
-package question_two
+package question
 
 // Isomorpher is interface, contains method Isomorphic
 type Isomorpher interface {
@@ -31,7 +31,7 @@ func (i *isomorpher) IsIsomorphic(s1, s2 string) bool {
 	return true
 }
 
-// NewIsomorpher return a new object of isomorpher type
+// NewIsomorpher return a new object, implemented Isomorpher
 func NewIsomorpher() Isomorpher {
-	return new(isomorpher)
+	return &isomorpher{}
 }
