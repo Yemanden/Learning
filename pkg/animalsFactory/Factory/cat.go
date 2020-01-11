@@ -1,6 +1,8 @@
-package animals
+package Factory
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // Structure contained the data of cats
 type cat struct {
