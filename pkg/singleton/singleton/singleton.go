@@ -2,10 +2,19 @@ package singleton
 
 import "sync"
 
-// Singletoner is interface, contains methods Add and GetData
-type Singletoner interface {
+// Adder ...
+type Adder interface {
 	Add(int)
+}
+
+// Getter ...
+type Getter interface {
 	GetData() int
+}
+
+type singletoner interface {
+	Adder
+	Getter
 }
 
 // singleton struct
@@ -16,17 +25,6 @@ type singleton struct {
 
 // Global variable for singleton
 var instance *singleton
-
-// GetInstance returns ours singleton or initialized his
-func GetInstance() Singletoner {
-	if instance == nil {
-		instance = &singleton{}
-		instance.Lock()
-		defer instance.Unlock()
-		instance.data = 0
-	}
-	return instance
-}
 
 // Add increases value of data in singleton by i
 func (s *singleton) Add(i int) {
@@ -40,4 +38,15 @@ func (s *singleton) GetData() int {
 	s.RLock()
 	defer s.RUnlock()
 	return s.data
+}
+
+// GetInstance returns ours singleton or initialized his
+func GetInstance() singletoner {
+	if instance == nil {
+		instance = &singleton{}
+		instance.Lock()
+		defer instance.Unlock()
+		instance.data = 0
+	}
+	return instance
 }
