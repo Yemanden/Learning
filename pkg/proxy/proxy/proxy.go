@@ -1,5 +1,11 @@
 package proxy
 
+// proxer is interface, contains interfaces Setter and Getter
+type proxer interface {
+	Setter
+	Getter
+}
+
 // Setter ...
 type Setter interface {
 	SetData(int)
@@ -8,12 +14,6 @@ type Setter interface {
 // Getter ...
 type Getter interface {
 	GetData() int
-}
-
-// proxyer is interface, contains methods SetData and GetData
-type proxer interface {
-	Setter
-	Getter
 }
 
 // proxy contains reference on a realObject
