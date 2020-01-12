@@ -1,5 +1,11 @@
 package questionseven
 
+type getter interface {
+	getValue() int
+	getLeftNode() TreeNoder
+	getRightNode() TreeNoder
+}
+
 // TreeNoder ...
 type TreeNoder interface {
 	TreeMerger
@@ -7,12 +13,7 @@ type TreeNoder interface {
 	getter
 }
 
-type getter interface {
-	getValue() int
-	getLeftNode() TreeNoder
-	getRightNode() TreeNoder
-}
-
+// Setter ...
 type Setter interface {
 	SetValue(int)
 	SetLeftNode(TreeNoder)
