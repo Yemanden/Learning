@@ -1,41 +1,97 @@
-package question_seven
+package questionseven
+
+type treeNoder interface {
+	TreeMerger
+	Setter
+	getter
+}
+
+type getter interface {
+	getValue() int
+	getLeftNode() treeNoder
+	getRightNode() treeNoder
+}
+
+type Setter interface {
+	SetValue(int)
+	SetLeftNode(treeNoder)
+	SetRightNode(treeNoder)
+}
+
+// TreeMerger ...
+type TreeMerger interface {
+	TreeMerge(treeNoder) treeNoder
+}
 
 type treeNode struct {
 	val   int
-	left  *treeNode
-	right *treeNode
+	left  treeNoder
+	right treeNoder
 }
 
-func mergeTrees(t1 *treeNode, t2 *treeNode) *treeNode {
-	if t1 == nil {
-		return t2
+// TreeMerge ...
+func (t *treeNode) TreeMerge(otherTree treeNoder) treeNoder {
+	if t == nil {
+		return otherTree
 	}
-	if t2 == nil {
-		return t1
+	if otherTree == nil {
+		return t
 	}
 
 	t3 := &treeNode{}
-	t3.val = t1.val + t2.val
+	t3.val = t.val + otherTree.getValue()
 
-	if t1.left != nil {
-		if t2.left != nil {
-			t3.left = mergeTrees(t1.left, t2.left) // one one
+	if t.left != nil {
+		if otherTree.getLeftNode() != nil {
+			t3.left = t.left.TreeMerge(otherTree.getLeftNode()) // one one
 		} else {
-			t3.left = mergeTrees(t1.left, nil) // one nil
+			t3.left = t.left // one nil
 		}
-	} else if t2.left != nil {
-		t3.left = mergeTrees(nil, t2.left) // nil one
+	} else {
+		t3.left = otherTree.getLeftNode() // one nil
 	}
 
-	if t1.right != nil {
-		if t2.right != nil {
-			t3.right = mergeTrees(t1.right, t2.right) // one one
+	if t.right != nil {
+		if otherTree.getRightNode() != nil {
+			t3.right = t.right.TreeMerge(otherTree.getRightNode()) // one one
 		} else {
-			t3.right = mergeTrees(t1.right, nil) // one nil
+			t3.right = t.right // one nil
 		}
-	} else if t2.right != nil {
-		t3.right = mergeTrees(nil, t2.right) // nil one
+	} else {
+		t3.right = otherTree.getRightNode() // nil one
 	}
 
 	return t3
+}
+
+// SetValue ...
+func (t *treeNode) SetValue(val int) {
+	t.val = val
+}
+
+// SetLeftNode ...
+func (t *treeNode) SetLeftNode(node treeNoder) {
+	t.left = node
+}
+
+// SetRightNode ...
+func (t *treeNode) SetRightNode(node treeNoder) {
+	t.right = node
+}
+
+func (t *treeNode) getValue() int {
+	return t.val
+}
+
+func (t *treeNode) getLeftNode() treeNoder {
+	return t.left
+}
+
+func (t *treeNode) getRightNode() treeNoder {
+	return t.right
+}
+
+// NewTreeNode ...
+func NewTreeNode() treeNoder {
+	return &treeNode{}
 }
