@@ -1,13 +1,13 @@
 package questionsix
 
-type listNoder interface {
+type ListNoder interface {
 	CycleFinder
 	NodeSetter
 	getter
 }
 
 type getter interface {
-	getNext() listNoder
+	getNext() ListNoder
 }
 
 // CycleFinder ...
@@ -17,20 +17,20 @@ type CycleFinder interface {
 
 // NodeSetter ...
 type NodeSetter interface {
-	SetNode(node listNoder)
+	SetNode(node ListNoder)
 	SetValue(int)
 }
 
 // listNode is structure of singly linked list
 type listNode struct {
 	data int
-	next listNoder
+	next ListNoder
 }
 
 // HasCycle checks the loop in a linked list
 func (l *listNode) CycleFind() bool {
-	Slow := listNoder(l)
-	Fast := listNoder(l)
+	Slow := ListNoder(l)
+	Fast := ListNoder(l)
 	for {
 		if Fast.getNext() == nil || Fast.getNext().getNext() == nil {
 			return false
@@ -45,7 +45,7 @@ func (l *listNode) CycleFind() bool {
 }
 
 // SetNode needs for cycle created (lol)
-func (l *listNode) SetNode(node listNoder) {
+func (l *listNode) SetNode(node ListNoder) {
 	l.next = node
 }
 
@@ -54,11 +54,11 @@ func (l *listNode) SetValue(val int) {
 	l.data = val
 }
 
-func (l *listNode) getNext() listNoder {
+func (l *listNode) getNext() ListNoder {
 	return l.next
 }
 
 // NewListNode ...
-func NewListNode() listNoder {
+func NewListNode() ListNoder {
 	return &listNode{}
 }

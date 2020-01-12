@@ -1,7 +1,7 @@
 package proxy
 
-// proxer is interface, contains interfaces Setter and Getter
-type proxer interface {
+// Proxer is interface, contains interfaces Setter and Getter
+type Proxer interface {
 	Setter
 	Getter
 }
@@ -19,7 +19,7 @@ type Getter interface {
 // proxy contains reference on a realObject
 type proxy struct {
 	data   int
-	object proxer
+	object Proxer
 }
 
 // SetData sets a value for realObject data
@@ -35,7 +35,7 @@ func (p *proxy) GetData() int {
 	return p.data
 }
 
-func (p *proxy) getRealObject() proxer {
+func (p *proxy) getRealObject() Proxer {
 	if p.object == nil {
 		p.object = newRealObject()
 	}
@@ -43,6 +43,6 @@ func (p *proxy) getRealObject() proxer {
 }
 
 // NewProxy is constructor. Returns a new object of proxy structure, implemented Proxy interface
-func NewProxy() proxer {
+func NewProxy() Proxer {
 	return &proxy{}
 }

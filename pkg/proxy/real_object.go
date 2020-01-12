@@ -15,6 +15,6 @@ func (s *realObject) GetData() int {
 	return s.data
 }
 
-func newRealObject() proxer {
+func newRealObject() Proxer {
 	return &realObject{}
 }
