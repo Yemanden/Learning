@@ -1,6 +1,7 @@
 package questionseven
 
-type treeNoder interface {
+// TreeNoder ...
+type TreeNoder interface {
 	TreeMerger
 	Setter
 	getter
@@ -8,29 +9,29 @@ type treeNoder interface {
 
 type getter interface {
 	getValue() int
-	getLeftNode() treeNoder
-	getRightNode() treeNoder
+	getLeftNode() TreeNoder
+	getRightNode() TreeNoder
 }
 
 type Setter interface {
 	SetValue(int)
-	SetLeftNode(treeNoder)
-	SetRightNode(treeNoder)
+	SetLeftNode(TreeNoder)
+	SetRightNode(TreeNoder)
 }
 
 // TreeMerger ...
 type TreeMerger interface {
-	TreeMerge(treeNoder) treeNoder
+	TreeMerge(TreeNoder) TreeNoder
 }
 
 type treeNode struct {
 	val   int
-	left  treeNoder
-	right treeNoder
+	left  TreeNoder
+	right TreeNoder
 }
 
 // TreeMerge ...
-func (t *treeNode) TreeMerge(otherTree treeNoder) treeNoder {
+func (t *treeNode) TreeMerge(otherTree TreeNoder) TreeNoder {
 	if t == nil {
 		return otherTree
 	}
@@ -70,12 +71,12 @@ func (t *treeNode) SetValue(val int) {
 }
 
 // SetLeftNode ...
-func (t *treeNode) SetLeftNode(node treeNoder) {
+func (t *treeNode) SetLeftNode(node TreeNoder) {
 	t.left = node
 }
 
 // SetRightNode ...
-func (t *treeNode) SetRightNode(node treeNoder) {
+func (t *treeNode) SetRightNode(node TreeNoder) {
 	t.right = node
 }
 
@@ -83,15 +84,15 @@ func (t *treeNode) getValue() int {
 	return t.val
 }
 
-func (t *treeNode) getLeftNode() treeNoder {
+func (t *treeNode) getLeftNode() TreeNoder {
 	return t.left
 }
 
-func (t *treeNode) getRightNode() treeNoder {
+func (t *treeNode) getRightNode() TreeNoder {
 	return t.right
 }
 
 // NewTreeNode ...
-func NewTreeNode() treeNoder {
+func NewTreeNode() TreeNoder {
 	return &treeNode{}
 }

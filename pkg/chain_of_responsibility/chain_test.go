@@ -7,30 +7,30 @@ import (
 )
 
 const (
-	TestChainPass1Name  = "Three handlers"
-	TestChainPass1Input = "input"
-	TestChainPass1Want  = "input HandlerA HandlerA HandlerB"
+	testChainPass1Name  = "Three handlers"
+	testChainPass1Input = "input"
+	testChainPass1Want  = "input HandlerA HandlerA HandlerB"
 
-	TestChainPass2Name  = "Two handlers"
-	TestChainPass2Input = "input"
-	TestChainPass2Want  = "input HandlerA HandlerB"
+	testChainPass2Name  = "Two handlers"
+	testChainPass2Input = "input"
+	testChainPass2Want  = "input HandlerA HandlerB"
 )
 
 func TestChain(t *testing.T) {
-	t.Run(TestChainPass1Name, func(t *testing.T) {
+	t.Run(testChainPass1Name, func(t *testing.T) {
 		chain := NewHandlerA(NewHandlerA(NewHandlerB(nil)))
 
-		got := chain.Handle(TestChainPass1Input)
-		want := TestChainPass1Want
+		got := chain.Handle(testChainPass1Input)
+		want := testChainPass1Want
 
 		assert.EqualValues(t, got, want)
 	})
 
-	t.Run(TestChainPass2Name, func(t *testing.T) {
+	t.Run(testChainPass2Name, func(t *testing.T) {
 		chain := NewHandlerA(NewHandlerB(nil))
 
-		got := chain.Handle(TestChainPass2Input)
-		want := TestChainPass2Want
+		got := chain.Handle(testChainPass2Input)
+		want := testChainPass2Want
 
 		assert.EqualValues(t, got, want)
 	})

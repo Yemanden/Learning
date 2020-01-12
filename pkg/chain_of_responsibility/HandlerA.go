@@ -1,6 +1,6 @@
 package chainofresp
 
-// HandlerA is example Handlers
+// handlerA is example Handlers
 type handlerA struct {
 	next Handler
 }
