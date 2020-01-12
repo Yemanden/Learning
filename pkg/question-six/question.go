@@ -1,13 +1,14 @@
 package questionsix
 
+type getter interface {
+	getNext() ListNoder
+}
+
+// ListNoder ...
 type ListNoder interface {
 	CycleFinder
 	NodeSetter
 	getter
-}
-
-type getter interface {
-	getNext() ListNoder
 }
 
 // CycleFinder ...
@@ -27,7 +28,7 @@ type listNode struct {
 	next ListNoder
 }
 
-// HasCycle checks the loop in a linked list
+// CycleFind checks the loop in a linked list
 func (l *listNode) CycleFind() bool {
 	Slow := ListNoder(l)
 	Fast := ListNoder(l)
