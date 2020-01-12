@@ -7,20 +7,20 @@ import (
 )
 
 const (
-	TestNewCreatorName    = "NewCreator"
-	TestCreatePass1Name   = "Create Cat"
-	TestCreatePass2Name   = "Create Dog"
-	TestCreatePass3Name   = "Create Duck"
-	TestGetDataPass1Name  = "GetData Cat"
-	TestGetDataPass1Input = "Murka"
-	TestGetDataPass2Name  = "GetData Dog"
-	TestGetDataPass2Input = "Sharik"
-	TestGetDataPass3Name  = "GetData Duck"
-	TestGetDataPass3Input = "GaGa"
+	testNewCreatorName    = "NewCreator"
+	testCreatePass1Name   = "Create Cat"
+	testCreatePass2Name   = "Create Dog"
+	testCreatePass3Name   = "Create Duck"
+	testGetDataPass1Name  = "GetData Cat"
+	testGetDataPass1Input = "Murka"
+	testGetDataPass2Name  = "GetData Dog"
+	testGetDataPass2Input = "Sharik"
+	testGetDataPass3Name  = "GetData Duck"
+	testGetDataPass3Input = "GaGa"
 )
 
 func TestNewCreator(t *testing.T) {
-	t.Run(TestNewCreatorName, func(t *testing.T) {
+	t.Run(testNewCreatorName, func(t *testing.T) {
 		got := NewCreator()
 		want := &creator{}
 
@@ -30,19 +30,19 @@ func TestNewCreator(t *testing.T) {
 
 func TestCreate(t *testing.T) {
 
-	t.Run(TestCreatePass1Name, func(t *testing.T) {
+	t.Run(testCreatePass1Name, func(t *testing.T) {
 		got := NewCreator().Create("Cat")
 		want := &cat{}
 
 		assert.EqualValues(t, got, want)
 	})
-	t.Run(TestCreatePass2Name, func(t *testing.T) {
+	t.Run(testCreatePass2Name, func(t *testing.T) {
 		got := NewCreator().Create("Dog")
 		want := &dog{}
 
 		assert.EqualValues(t, got, want)
 	})
-	t.Run(TestCreatePass3Name, func(t *testing.T) {
+	t.Run(testCreatePass3Name, func(t *testing.T) {
 		got := NewCreator().Create("Duck")
 		want := &duck{}
 
@@ -52,27 +52,27 @@ func TestCreate(t *testing.T) {
 
 func TestGetData(t *testing.T) {
 
-	t.Run(TestGetDataPass1Name, func(t *testing.T) {
+	t.Run(testGetDataPass1Name, func(t *testing.T) {
 		temp := NewCreator().Create("Cat")
-		temp.SetData(TestGetDataPass1Input, "", "", 0)
+		temp.SetData(testGetDataPass1Input, "", "", 0)
 		got, _, _, _ := temp.GetData()
-		want := TestGetDataPass1Input
+		want := testGetDataPass1Input
 
 		assert.EqualValues(t, got, want)
 	})
-	t.Run(TestGetDataPass2Name, func(t *testing.T) {
+	t.Run(testGetDataPass2Name, func(t *testing.T) {
 		temp := NewCreator().Create("Dog")
-		temp.SetData(TestGetDataPass2Input, "", "", 0)
+		temp.SetData(testGetDataPass2Input, "", "", 0)
 		got, _, _, _ := temp.GetData()
-		want := TestGetDataPass2Input
+		want := testGetDataPass2Input
 
 		assert.EqualValues(t, got, want)
 	})
-	t.Run(TestGetDataPass3Name, func(t *testing.T) {
+	t.Run(testGetDataPass3Name, func(t *testing.T) {
 		temp := NewCreator().Create("Duck")
-		temp.SetData(TestGetDataPass3Input, "", "", 0)
+		temp.SetData(testGetDataPass3Input, "", "", 0)
 		got, _, _, _ := temp.GetData()
-		want := TestGetDataPass3Input
+		want := testGetDataPass3Input
 
 		assert.EqualValues(t, got, want)
 	})
