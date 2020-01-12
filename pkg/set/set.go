@@ -2,6 +2,7 @@ package set
 
 import "sync"
 
+// Seter ...
 type Seter interface {
 	Getter
 	Adder
