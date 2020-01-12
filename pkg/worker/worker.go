@@ -31,8 +31,6 @@ func (f *foreman) Work(ctx context.Context, workerCount uint) {
 	fmt.Println(output)
 }
 
-// Функция выполнения работы (возведения числа в квадрат с задержкой)
-// На вход принимает канал с задачами для чтения и канал с результатами для записи
 func workerUsing(ctx context.Context, report chan<- int) {
 	task := ctx.Value("task").(int)
 	done := make(chan struct{})
