@@ -1,4 +1,4 @@
-package Factory
+package animalsFactory
 
 // Creator is interface, contains method Create
 type Creator interface {

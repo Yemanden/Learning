@@ -1,4 +1,4 @@
-package Factory
+package animalsFactory
 
 // Interface describing the behavior of all animals
 type Animal interface {

@@ -1,9 +1,7 @@
-package questionfourtest
+package questionfour
 
 import (
 	"testing"
-
-	"github.com/Yemanden/Learning/pkg/question-four/question"
 )
 
 const (
@@ -29,7 +27,7 @@ func BenchmarkMerge(b *testing.B) {
 			nums2[i] = i*5 + 9
 		}
 
-		m := questionfour.NewMerger()
+		m := NewMerger()
 
 		b.StartTimer()
 		m.Merge(nums1, benchmarkTestMergePass1Count, nums2, benchmarkTestMergePass1Count)
@@ -48,7 +46,7 @@ func BenchmarkMerge(b *testing.B) {
 			nums2[i] = i*5 + 9
 		}
 
-		m := questionfour.NewMerger()
+		m := NewMerger()
 
 		b.StartTimer()
 		m.Merge(nums1, benchmarkTestMergePass2Count, nums2, benchmarkTestMergePass2Count)

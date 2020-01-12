@@ -1,4 +1,4 @@
-package Factory
+package animalsFactory
 
 import (
 	"fmt"
