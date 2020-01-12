@@ -1,4 +1,4 @@
-package question
+package questiontwo
 
 // Isomorpher is interface, contains method Isomorphic
 type Isomorpher interface {

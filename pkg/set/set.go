@@ -2,16 +2,44 @@ package set
 
 import "sync"
 
-// Set is interface, contains methods
-// GetValue, Add, Remove, Union, Difference, Intersection, Subset
-type Set interface {
+type seter interface {
+	Getter
+	Adder
+	Remover
+	Unioner
+	Differencer
+	Intersectioner
+	IsSubset(seter) bool
+}
+
+// Getter ...
+type Getter interface {
 	GetValues() map[int]bool
+}
+
+// Adder ...
+type Adder interface {
 	Add(int)
+}
+
+// Remover ...
+type Remover interface {
 	Remove(int) bool
-	Union(Set) Set
-	Difference(Set) Set
-	Intersection(Set) Set
-	IsSubset(Set) bool
+}
+
+// Unioner ...
+type Unioner interface {
+	Union(seter) seter
+}
+
+// Differencer ...
+type Differencer interface {
+	Difference(seter) seter
+}
+
+// Intersectioner ...
+type Intersectioner interface {
+	Intersection(seter) seter
 }
 
 type set struct {
@@ -53,7 +81,7 @@ func (s *set) Remove(elem int) bool {
 
 // Union unites two Sets this object and s2.
 // Returns new Set
-func (s *set) Union(s2 Set) Set {
+func (s *set) Union(s2 seter) seter {
 	newS := NewSet()
 
 	s.RLock()
@@ -69,7 +97,7 @@ func (s *set) Union(s2 Set) Set {
 }
 
 // Difference returns new Set, contains elements of the this object, absent in the s2.
-func (s *set) Difference(s2 Set) Set {
+func (s *set) Difference(s2 seter) seter {
 	newS := NewSet()
 
 	s.RLock()
@@ -83,7 +111,7 @@ func (s *set) Difference(s2 Set) Set {
 }
 
 // Intersection returns new Set, containing common elements of a this object and a s2.
-func (s *set) Intersection(s2 Set) Set {
+func (s *set) Intersection(s2 seter) seter {
 	newS := NewSet()
 
 	s.RLock()
@@ -98,7 +126,7 @@ func (s *set) Intersection(s2 Set) Set {
 
 // Subset checks if a this object is a subset s2.
 // Returns boolean.
-func (s *set) IsSubset(s2 Set) bool {
+func (s *set) IsSubset(s2 seter) bool {
 	s.RLock()
 	defer s.RUnlock()
 	for item, _ := range s.data {
@@ -110,6 +138,6 @@ func (s *set) IsSubset(s2 Set) bool {
 }
 
 // NewSet creates and returns a new Set
-func NewSet() Set {
+func NewSet() seter {
 	return &set{}
 }

@@ -1,11 +1,9 @@
-package questiontest
+package questiontwo
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
-	"github.com/Yemanden/Learning/pkg/question-two/question"
 )
 
 const (
@@ -28,7 +26,7 @@ const (
 
 // TestIsomorphic is testing the public function "IsIsomorphic"
 func TestIsIsomorphic(t *testing.T) {
-	isomorph := question.NewIsomorpher()
+	isomorph := NewIsomorpher()
 
 	// This is pass with isomorphic words
 	t.Run(testIsIsomorphicPass1Name, func(t *testing.T) {

@@ -1,11 +1,9 @@
-package settest
+package set
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
-	"github.com/Yemanden/Learning/pkg/set/set"
 )
 
 const (
@@ -35,7 +33,7 @@ const (
 
 // TestGetValues ...
 func TestGetValues(t *testing.T) {
-	s := set.NewSet()
+	s := NewSet()
 	for i := 1; i < 10; i++ {
 		s.Add(i)
 	}
@@ -50,7 +48,7 @@ func TestGetValues(t *testing.T) {
 
 // TestAdd ...
 func TestAdd(t *testing.T) {
-	s := set.NewSet()
+	s := NewSet()
 	for i := 1; i < 10; i++ {
 		s.Add(i)
 	}
@@ -63,7 +61,7 @@ func TestAdd(t *testing.T) {
 		assert.EqualValues(t, got, want)
 	})
 
-	s = set.NewSet()
+	s = NewSet()
 	for i := 1; i < 10; i++ {
 		s.Add(i)
 	}
@@ -79,7 +77,7 @@ func TestAdd(t *testing.T) {
 
 // TestRemove ...
 func TestRemove(t *testing.T) {
-	s := set.NewSet()
+	s := NewSet()
 	for i := 1; i < 10; i++ {
 		s.Add(i)
 	}
@@ -100,8 +98,8 @@ func TestRemove(t *testing.T) {
 
 // TestUnion ...
 func TestUnion(t *testing.T) {
-	s1 := set.NewSet()
-	s2 := set.NewSet()
+	s1 := NewSet()
+	s2 := NewSet()
 	for i := 1; i < 4; i++ {
 		s1.Add(i)
 		s2.Add(2 * i)
@@ -117,8 +115,8 @@ func TestUnion(t *testing.T) {
 
 // TestDifference ...
 func TestDifference(t *testing.T) {
-	s1 := set.NewSet()
-	s2 := set.NewSet()
+	s1 := NewSet()
+	s2 := NewSet()
 	for i := 1; i < 4; i++ {
 		s1.Add(i)
 		s2.Add(2 * i)
@@ -134,8 +132,8 @@ func TestDifference(t *testing.T) {
 
 // TestIntersection ...
 func TestIntersection(t *testing.T) {
-	s1 := set.NewSet()
-	s2 := set.NewSet()
+	s1 := NewSet()
+	s2 := NewSet()
 	for i := 1; i < 4; i++ {
 		s1.Add(i)
 		s2.Add(2 * i)
@@ -151,13 +149,13 @@ func TestIntersection(t *testing.T) {
 
 // TestSubset ...
 func TestSubset(t *testing.T) {
-	s1 := set.NewSet()
-	s2 := set.NewSet()
+	s1 := NewSet()
+	s2 := NewSet()
 	for i := 1; i < 4; i++ {
 		s1.Add(i)
 		s2.Add(2 * i)
 	}
-	s3 := set.NewSet()
+	s3 := NewSet()
 	for i := 1; i < 10; i++ {
 		s3.Add(i)
 	}
