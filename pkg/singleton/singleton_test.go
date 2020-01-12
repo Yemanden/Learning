@@ -1,11 +1,9 @@
-package singleton_test
+package singleton
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-
-	"github.com/Yemanden/Learning/pkg/singleton/singleton"
 )
 
 const (
@@ -18,9 +16,9 @@ const (
 // TestGetInstance ...
 func TestGetInstance(t *testing.T) {
 	t.Run(testGetInstanceName, func(t *testing.T) {
-		got := singleton.GetInstance()
+		got := GetInstance()
 		got.Add(3)
-		want := singleton.GetInstance()
+		want := GetInstance()
 
 		assert.EqualValues(t, want, got)
 	})
@@ -29,7 +27,7 @@ func TestGetInstance(t *testing.T) {
 // TestData ...
 func TestData(t *testing.T) {
 	t.Run(testDataName, func(t *testing.T) {
-		single := singleton.GetInstance()
+		single := GetInstance()
 		tmp := single.GetData()
 		single.Add(testDataInput)
 

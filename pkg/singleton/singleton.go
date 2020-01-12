@@ -2,6 +2,11 @@ package singleton
 
 import "sync"
 
+type singletoner interface {
+	Adder
+	Getter
+}
+
 // Adder ...
 type Adder interface {
 	Add(int)
@@ -10,11 +15,6 @@ type Adder interface {
 // Getter ...
 type Getter interface {
 	GetData() int
-}
-
-type singletoner interface {
-	Adder
-	Getter
 }
 
 // singleton struct
