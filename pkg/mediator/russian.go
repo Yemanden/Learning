@@ -1,13 +1,18 @@
 package mediator
 
-// PerformerB is concrete Performer
+// russian is concrete Performer
 type russian struct {
-	Mediator Mediator
+	mediator Mediator
 }
 
 // Send sends message to Mediator
 func (p *russian) Send(msg string) string {
-	return p.Mediator.send(msg)
+	return p.mediator.send(msg)
+}
+
+// SetMediator ...
+func (r *russian) SetMediator(m Mediator) {
+	r.mediator = m
 }
 
 func (p *russian) receive(s string) string {
@@ -15,6 +20,6 @@ func (p *russian) receive(s string) string {
 }
 
 // NewRussian returns a new russian
-func NewRussian(m *Mediator) Performer {
-	return &russian{*m}
+func NewRussian() Performer {
+	return &russian{}
 }

@@ -6,51 +6,57 @@ import (
 )
 
 const (
-	TestMediatorPass1Name = "TestMediator Russian to Englishman"
-	TestMediatorPass2Name = "TestMediator Englishman to Russian"
-	TestMediatorPass3Name = "TestMediator Missing"
-	TestMediatorInput1    = "Добрый вечер!"
-	TestMediatorWant1     = "Given the error: Zdarova! Done!"
-	TestMediatorInput2    = "Hello!"
-	TestMediatorWant2     = "С учётом погрешности: Здарова! Успешно!"
+	testMediatorPass1Name = "TestMediator Russian to Englishman"
+	testMediatorPass2Name = "TestMediator Englishman to Russian"
+	testMediatorPass3Name = "TestMediator Missing"
+	testMediatorInput1    = "Добрый вечер!"
+	testMediatorWant1     = "Given the error: Zdarova! Done!"
+	testMediatorInput2    = "Hello!"
+	testMediatorWant2     = "С учётом погрешности: Здарова! Успешно!"
 	testMediatorInput3    = "Test"
-	TestMediatorWant3     = "Ja ja, naturlich!"
+	testMediatorWant3     = "Ja ja, naturlich!"
 )
 
 func TestMediator(t *testing.T) {
-	t.Run(TestMediatorPass1Name, func(t *testing.T) {
+	t.Run(testMediatorPass1Name, func(t *testing.T) {
 		medic := NewConcreteMediator()
-		a := NewEnglishman(&medic)
-		b := NewRussian(&medic)
+		a := NewEnglishman()
+		a.SetMediator(medic)
+		b := NewRussian()
+		b.SetMediator(medic)
 
-		medic.SetPerformers(&a, &b)
+		medic.SetPerformers(a, b)
 
-		got := b.Send(TestMediatorInput1)
-		want := TestMediatorWant1
+		got := b.Send(testMediatorInput1)
+		want := testMediatorWant1
 
-		assert.EqualValues(t, got, want)
+		assert.EqualValues(t, want, got)
 	})
-	t.Run(TestMediatorPass2Name, func(t *testing.T) {
+	t.Run(testMediatorPass2Name, func(t *testing.T) {
 		medic := NewConcreteMediator()
-		a := NewEnglishman(&medic)
-		b := NewRussian(&medic)
+		a := NewEnglishman()
+		a.SetMediator(medic)
+		b := NewRussian()
+		b.SetMediator(medic)
 
-		medic.SetPerformers(&a, &b)
+		medic.SetPerformers(a, b)
 
-		got := a.Send(TestMediatorInput2)
-		want := TestMediatorWant2
+		got := a.Send(testMediatorInput2)
+		want := testMediatorWant2
 
-		assert.EqualValues(t, got, want)
+		assert.EqualValues(t, want, got)
 	})
-	t.Run(TestMediatorPass3Name, func(t *testing.T) {
+	t.Run(testMediatorPass3Name, func(t *testing.T) {
 		medic := NewConcreteMediator()
-		a := NewEnglishman(&medic)
-		b := NewRussian(&medic)
+		a := NewEnglishman()
+		a.SetMediator(medic)
+		b := NewRussian()
+		b.SetMediator(medic)
 
-		medic.SetPerformers(&a, &b)
+		medic.SetPerformers(a, b)
 
 		got := b.Send(testMediatorInput3)
-		want := TestMediatorWant3
-		assert.EqualValues(t, got, want)
+		want := testMediatorWant3
+		assert.EqualValues(t, want, got)
 	})
 }
