@@ -2,7 +2,8 @@ package singleton
 
 import "sync"
 
-type singletoner interface {
+// Singletoner ...
+type Singletoner interface {
 	Adder
 	Getter
 }
@@ -41,7 +42,7 @@ func (s *singleton) GetData() int {
 }
 
 // GetInstance returns ours singleton or initialized his
-func GetInstance() singletoner {
+func GetInstance() Singletoner {
 	if instance == nil {
 		instance = &singleton{}
 		instance.Lock()
