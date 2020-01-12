@@ -1,4 +1,4 @@
-package question_one
+package questionone
 
 import "errors"
 
