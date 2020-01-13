@@ -2,7 +2,7 @@ package observer
 
 type concreteObserverA struct{}
 
-// Observe returns changed massage s, received from Publisher
+// Observe returns changed message s, received from Publisher
 func (c *concreteObserverA) Observe(s string) string {
 	return "I am ObserverA " + s
 }

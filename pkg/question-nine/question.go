@@ -3,7 +3,19 @@ package questionnine
 // ListReverser ...
 type ListReverser interface {
 	Reverse() ListReverser
+	Getter
+	Setter
+}
+
+// Getter ...
+type Getter interface {
 	GetData() []int
+}
+
+// Setter ...
+type Setter interface {
+	SetValue(int)
+	SetNextNode(ListReverser)
 }
 
 type listNode struct {
@@ -41,7 +53,17 @@ func (l *listNode) GetData() []int {
 	return result
 }
 
+// SetValue ...
+func (l *listNode) SetValue(value int) {
+	l.val = value
+}
+
+// SetNextNode ...
+func (l *listNode) SetNextNode(next ListReverser) {
+	l.next = next
+}
+
 // NewListNode ...
-func NewListNode(val int, next ListReverser) ListReverser {
-	return &listNode{val, next}
+func NewListNode() ListReverser {
+	return &listNode{}
 }

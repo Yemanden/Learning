@@ -1,17 +1,19 @@
-package observer_test
+package observer
 
 import (
-	"github.com/Yemanden/Learning/pkg/observer"
-	"github.com/Yemanden/Learning/pkg/publisher"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+
+	"github.com/Yemanden/Learning/pkg/observer/publisher"
 )
 
 const (
-	testObserverInput     = "Hi!"
 	testObserverPass1Name = "Two observers"
 	testObserverPass2Name = "One observer"
 	testObserverPass3Name = "Remove Observer"
+
+	testObserverInput = "Hi!"
 )
 
 var (
@@ -24,8 +26,8 @@ var (
 func TestObserver(t *testing.T) {
 	t.Run(testObserverPass1Name, func(t *testing.T) {
 		publ := publisher.NewConcretePublisher()
-		a := observer.NewConcreteObserverA()
-		b := observer.NewConcreteObserverB()
+		a := NewConcreteObserverA()
+		b := NewConcreteObserverB()
 		publ.AddObserver(a)
 		publ.AddObserver(b)
 
@@ -36,24 +38,24 @@ func TestObserver(t *testing.T) {
 	})
 
 	t.Run(testObserverPass2Name, func(t *testing.T) {
-		publisher := publisher.NewConcretePublisher()
-		a := observer.NewConcreteObserverA()
-		publisher.AddObserver(a)
+		publ := publisher.NewConcretePublisher()
+		a := NewConcreteObserverA()
+		publ.AddObserver(a)
 
-		got := publisher.Publish(testObserverInput)
+		got := publ.Publish(testObserverInput)
 		want := testObserverPass2Want
 
 		assert.EqualValues(t, got, want)
 	})
 	t.Run(testObserverPass3Name, func(t *testing.T) {
-		publisher := publisher.NewConcretePublisher()
-		a := observer.NewConcreteObserverA()
-		b := observer.NewConcreteObserverB()
-		publisher.AddObserver(a)
-		publisher.AddObserver(b)
-		publisher.RemoveObserver(a)
+		publ := publisher.NewConcretePublisher()
+		a := NewConcreteObserverA()
+		b := NewConcreteObserverB()
+		publ.AddObserver(a)
+		publ.AddObserver(b)
+		publ.RemoveObserver(a)
 
-		got := publisher.Publish(testObserverInput)
+		got := publ.Publish(testObserverInput)
 		want := testObserverPass3Want
 
 		assert.EqualValues(t, got, want)
