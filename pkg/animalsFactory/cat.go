@@ -10,7 +10,7 @@ type cat struct {
 	Age                int
 }
 
-// SetData sets cats name, color. sound and age
+// SetData sets cats name, color, sound and age
 func (c *cat) SetData(name, color, sound string, age int) {
 	c.Name = name
 	c.Color = color

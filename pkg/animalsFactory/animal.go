@@ -1,6 +1,6 @@
 package animalsFactory
 
-// Interface describing the behavior of all animals
+// Animal is interface, describing the behavior of all animals
 type Animal interface {
 	Voice()
 	SetData(string, string, string, int)

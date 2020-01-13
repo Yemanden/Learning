@@ -10,7 +10,7 @@ type duck struct {
 	Age                int
 }
 
-// SetData sets ducks name, color. sound and age
+// SetData sets ducks name, color, sound and age
 func (d *duck) SetData(name, color, sound string, age int) {
 	d.Name = name
 	d.Color = color
