@@ -28,7 +28,7 @@ func (v *parenthesesValidator) Validation(input string) bool {
 	return true
 }
 
-// NewValidator creates a new object, implements Validator, fills and returns his.
-func NewValidator() Validator {
+// NewParenthesesValidator creates a new object, implements Validator, fills and returns his.
+func NewParenthesesValidator() Validator {
 	return &parenthesesValidator{map[string]string{")": "(", "}": "{", "]": "["}}
 }
