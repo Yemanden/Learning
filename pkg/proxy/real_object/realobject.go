@@ -1,4 +1,19 @@
-package proxy
+package realobject
+
+type proxer interface {
+	setter
+	getter
+}
+
+// Setter ...
+type setter interface {
+	SetData(int)
+}
+
+// Getter ...
+type getter interface {
+	GetData() int
+}
 
 // realObject is a real object
 type realObject struct {
@@ -15,6 +30,6 @@ func (s *realObject) GetData() int {
 	return s.data
 }
 
-func newRealObject() Proxer {
+func NewRealObject() proxer {
 	return &realObject{}
 }

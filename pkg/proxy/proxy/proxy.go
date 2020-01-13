@@ -1,5 +1,7 @@
 package proxy
 
+import "github.com/Yemanden/Learning/pkg/proxy/real_object"
+
 // Proxer is interface, contains interfaces Setter and Getter
 type Proxer interface {
 	Setter
@@ -37,7 +39,7 @@ func (p *proxy) GetData() int {
 
 func (p *proxy) getRealObject() Proxer {
 	if p.object == nil {
-		p.object = newRealObject()
+		p.object = realobject.NewRealObject()
 	}
 	return p.object
 }
