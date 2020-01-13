@@ -29,6 +29,7 @@ func TestTwoSum(t *testing.T) {
 		assert.EqualValues(t, want, got)
 		assert.EqualValues(t, wantErr, err)
 	})
+
 	t.Run(testTwoNumbersPass2Name, func(t *testing.T) {
 		lc := NewLeetCodeQuestion()
 		got, err := lc.TwoSum(numbers, 10)
