@@ -16,6 +16,7 @@ const (
 	testChainPass2Want  = "input HandlerA HandlerB"
 )
 
+// TestChain ...
 func TestChain(t *testing.T) {
 	t.Run(testChainPass1Name, func(t *testing.T) {
 		chain := NewHandlerA(NewHandlerA(NewHandlerB(nil)))
