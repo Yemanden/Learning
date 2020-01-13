@@ -48,14 +48,14 @@ type set struct {
 	data map[int]bool
 }
 
-// GetValues returns values of the data contained in this Set
+// GetValues returns values of the data contained in this Seter
 func (s *set) GetValues() map[int]bool {
 	s.RLock()
 	defer s.RUnlock()
 	return s.data
 }
 
-// Add appends elem in Set s
+// Add appends elem in Seter s
 func (s *set) Add(elem int) {
 	s.Lock()
 	defer s.Unlock()
@@ -68,7 +68,7 @@ func (s *set) Add(elem int) {
 	s.data[elem] = true
 }
 
-// Remove deletes elem from Set s.
+// Remove deletes elem from Seter s.
 // Returns true, if delete is successfully, else return false
 func (s *set) Remove(elem int) bool {
 	s.Lock()
@@ -80,8 +80,8 @@ func (s *set) Remove(elem int) bool {
 	return true
 }
 
-// Union unites two Sets this object and s2.
-// Returns new Set
+// Union unites two Seters this object and s2.
+// Returns new Seter
 func (s *set) Union(s2 Seter) Seter {
 	newS := NewSet()
 
@@ -97,7 +97,7 @@ func (s *set) Union(s2 Seter) Seter {
 	return newS
 }
 
-// Difference returns new Set, contains elements of the this object, absent in the s2.
+// Difference returns new Seter, contains elements of the this object, absent in the s2.
 func (s *set) Difference(s2 Seter) Seter {
 	newS := NewSet()
 
@@ -111,7 +111,7 @@ func (s *set) Difference(s2 Seter) Seter {
 	return newS
 }
 
-// Intersection returns new Set, containing common elements of a this object and a s2.
+// Intersection returns new Seter, containing common elements of a this object and a s2.
 func (s *set) Intersection(s2 Seter) Seter {
 	newS := NewSet()
 
@@ -138,7 +138,7 @@ func (s *set) IsSubset(s2 Seter) bool {
 	return true
 }
 
-// NewSet creates and returns a new Set
+// NewSet creates and returns a new Seter
 func NewSet() Seter {
 	return &set{}
 }
