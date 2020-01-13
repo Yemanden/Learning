@@ -1,8 +1,11 @@
 package memento
 
 import (
-	"github.com/stretchr/testify/assert"
+	"github.com/Yemanden/Learning/pkg/memento/memento"
+	originator2 "github.com/Yemanden/Learning/pkg/memento/originator"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 const (
@@ -19,31 +22,34 @@ const (
 	testMementoPass3Want = "Initiated"
 )
 
+// TestMemento ...
 func TestMemento(t *testing.T) {
-	originator := NewOriginator(testMementoInit)
+	mem := memento.NewMemento(testMementoInit)
+	orig := originator2.NewOriginator(mem)
 
 	t.Run(testMementoPass1Name, func(t *testing.T) {
-		got := originator.GetState()
+		got := orig.GetState()
 		want := testMementoPass1Want
 
-		assert.EqualValues(t, got, want)
+		assert.EqualValues(t, want, got)
 	})
 
 	t.Run(testMementoPass2Name, func(t *testing.T) {
-		originator.ChangeState(testMementoPass2Input)
+		mem2 := memento.NewMemento(testMementoPass2Input)
+		orig.ChangeState(mem2)
 
-		got := originator.GetState()
+		got := orig.GetState()
 		want := testMementoPass2Want
 
-		assert.EqualValues(t, got, want)
+		assert.EqualValues(t, want, got)
 	})
 
 	t.Run(testMementoPass3Name, func(t *testing.T) {
-		originator.Rollback()
+		orig.Rollback()
 
-		got := originator.GetState()
+		got := orig.GetState()
 		want := testMementoPass3Want
 
-		assert.EqualValues(t, got, want)
+		assert.EqualValues(t, want, got)
 	})
 }
