@@ -10,6 +10,7 @@ const (
 	testSetGetDataName = "SetGetData"
 )
 
+// TestGetData ...
 func TestSetGetData(t *testing.T) {
 	t.Run(testSetGetDataName, func(t *testing.T) {
 		value := []int{1, 4, 7, 10, 123, 55}
