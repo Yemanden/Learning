@@ -11,17 +11,17 @@ type concreteMediator struct {
 }
 
 // SetPerformers sets new Performers in Mediator
-func (p *concreteMediator) SetPerformers(p1, p2 Performer) {
-	p.englishman = p1
-	p.russian = p2
+func (c *concreteMediator) SetPerformers(p1, p2 Performer) {
+	c.englishman = p1
+	c.russian = p2
 }
 
-func (p *concreteMediator) send(s string) string {
-	if s == "Hello!" && p.russian != nil {
-		return p.russian.receive("С учётом погрешности: Здарова!")
+func (c *concreteMediator) send(s string) string {
+	if s == "Hello!" && c.russian != nil {
+		return c.russian.receive("С учётом погрешности: Здарова!")
 	}
-	if s == "Добрый вечер!" && p.englishman != nil {
-		return p.englishman.receive("Given the error: Zdarova!")
+	if s == "Добрый вечер!" && c.englishman != nil {
+		return c.englishman.receive("Given the error: Zdarova!")
 	}
 	return "Ja ja, naturlich!"
 }

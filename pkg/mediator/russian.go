@@ -6,8 +6,8 @@ type russian struct {
 }
 
 // Send sends message to Mediator
-func (p *russian) Send(msg string) string {
-	return p.mediator.send(msg)
+func (r *russian) Send(msg string) string {
+	return r.mediator.send(msg)
 }
 
 // SetMediator ...
@@ -15,7 +15,7 @@ func (r *russian) SetMediator(m Mediator) {
 	r.mediator = m
 }
 
-func (p *russian) receive(s string) string {
+func (r *russian) receive(s string) string {
 	return s + " Успешно!"
 }
 

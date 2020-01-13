@@ -1,22 +1,26 @@
 package mediator
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 const (
 	testMediatorPass1Name = "TestMediator Russian to Englishman"
-	testMediatorPass2Name = "TestMediator Englishman to Russian"
-	testMediatorPass3Name = "TestMediator Missing"
 	testMediatorInput1    = "Добрый вечер!"
 	testMediatorWant1     = "Given the error: Zdarova! Done!"
+
+	testMediatorPass2Name = "TestMediator Englishman to Russian"
 	testMediatorInput2    = "Hello!"
 	testMediatorWant2     = "С учётом погрешности: Здарова! Успешно!"
+
+	testMediatorPass3Name = "TestMediator Missing"
 	testMediatorInput3    = "Test"
 	testMediatorWant3     = "Ja ja, naturlich!"
 )
 
+// TestMediator ...
 func TestMediator(t *testing.T) {
 	t.Run(testMediatorPass1Name, func(t *testing.T) {
 		medic := NewConcreteMediator()
@@ -32,6 +36,7 @@ func TestMediator(t *testing.T) {
 
 		assert.EqualValues(t, want, got)
 	})
+
 	t.Run(testMediatorPass2Name, func(t *testing.T) {
 		medic := NewConcreteMediator()
 		a := NewEnglishman()
@@ -46,6 +51,7 @@ func TestMediator(t *testing.T) {
 
 		assert.EqualValues(t, want, got)
 	})
+
 	t.Run(testMediatorPass3Name, func(t *testing.T) {
 		medic := NewConcreteMediator()
 		a := NewEnglishman()
