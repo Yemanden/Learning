@@ -1,4 +1,4 @@
-package animalsFactory
+package animals
 
 import (
 	"fmt"
@@ -28,6 +28,7 @@ func (c *cat) Voice() {
 	fmt.Println(c.Sound)
 }
 
-func newCat() Animal {
+// NewCat ...
+func NewCat() Animal {
 	return &cat{}
 }

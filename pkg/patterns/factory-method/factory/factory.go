@@ -1,8 +1,10 @@
-package animalsFactory
+package factory
+
+import "github.com/Yemanden/Learning/pkg/patterns/factory-method/animals"
 
 // Creator is interface, contains method Create
 type Creator interface {
-	Create(string) Animal
+	Create(string) animals.Animal
 }
 
 // An empty structure that has a Create method
@@ -10,22 +12,22 @@ type creator struct{}
 
 // Create takes the name of the structure to create.
 // Returns a new object implements interface Animal
-func (c *creator) Create(name string) Animal {
-	var anim Animal
+func (c *creator) Create(name string) animals.Animal {
+	var anim animals.Animal
 	switch name {
 	case "Cat":
 		{
-			anim = newCat()
+			anim = animals.NewCat()
 			break
 		}
 	case "Dog":
 		{
-			anim = newDog()
+			anim = animals.NewDog()
 			break
 		}
 	case "Duck":
 		{
-			anim = newDuck()
+			anim = animals.NewDuck()
 			break
 		}
 	}

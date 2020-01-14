@@ -1,4 +1,4 @@
-package questionfour
+package merge
 
 import (
 	"testing"

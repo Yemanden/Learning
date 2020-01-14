@@ -1,4 +1,4 @@
-package questiontwo
+package isomorphic
 
 import (
 	"testing"
