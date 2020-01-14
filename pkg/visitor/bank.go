@@ -2,8 +2,8 @@ package visitor
 
 import "fmt"
 
-// Bank ...
-type Bank interface {
+// Banker ...
+type Banker interface {
 	SeeBalance() string
 	Place
 }
@@ -23,6 +23,6 @@ func (b *bank) Accept(v Visitor) string {
 }
 
 // NewBank ...
-func NewBank(balance int) Bank {
+func NewBank(balance int) Banker {
 	return &bank{balance}
 }

@@ -1,7 +1,7 @@
 package visitor
 
-// Cinema ...
-type Cinema interface {
+// Cinemer ...
+type Cinemer interface {
 	SeeMovie() string
 	Place
 }
@@ -21,6 +21,6 @@ func (c *cinema) Accept(v Visitor) string {
 }
 
 // NewCinema ...
-func NewCinema(film string) Cinema {
+func NewCinema(film string) Cinemer {
 	return &cinema{film}
 }

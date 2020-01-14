@@ -18,6 +18,7 @@ const (
 	testVisitorPass2Want        = "Buy chicken 10 dollars See \"Star Wars\" "
 )
 
+// TestVisitor ...
 func TestVisitor(t *testing.T) {
 	t.Run(testVisitorPass1Name, func(t *testing.T) {
 		want := testVisitorPass1Want

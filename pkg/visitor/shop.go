@@ -1,7 +1,7 @@
 package visitor
 
-// Shop ...
-type Shop interface {
+// Shoper ...
+type Shoper interface {
 	BuyProduct() string
 	Place
 }
@@ -21,6 +21,6 @@ func (s *shop) Accept(v Visitor) string {
 }
 
 // NewShop ...
-func NewShop(product string) Shop {
+func NewShop(product string) Shoper {
 	return &shop{product}
 }

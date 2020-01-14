@@ -1,10 +1,10 @@
 package questioneleven
 
-type depthFirstSearch interface {
+type depthFirstSearcher interface {
 	dfs([][]byte, coordination)
 }
 
-type breadthFirstSearch interface {
+type breadthFirstSearcher interface {
 	bfs([][]byte, coordination)
 }
 
@@ -12,8 +12,8 @@ type breadthFirstSearch interface {
 type IslandCounter interface {
 	GetIslandCountDFS([][]byte) int
 	GetIslandCountBFS([][]byte) int
-	depthFirstSearch
-	breadthFirstSearch
+	depthFirstSearcher
+	breadthFirstSearcher
 }
 
 type islandCounter struct{}
