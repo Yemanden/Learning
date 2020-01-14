@@ -5,9 +5,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/Yemanden/Learning/pkg/adapter/adapter"
-	"github.com/Yemanden/Learning/pkg/adapter/client"
-	"github.com/Yemanden/Learning/pkg/adapter/service"
+	"github.com/Yemanden/Learning/pkg/patterns/adapter/adapter"
+	"github.com/Yemanden/Learning/pkg/patterns/adapter/client"
+	"github.com/Yemanden/Learning/pkg/patterns/adapter/service"
 )
 
 const (

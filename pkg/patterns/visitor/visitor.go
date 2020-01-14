@@ -2,25 +2,25 @@ package visitor
 
 // Visitor ...
 type Visitor interface {
-	VisitShop(Shop) string
-	VisitBank(Bank) string
-	VisitCinema(Cinema) string
+	VisitShop(Shoper) string
+	VisitBank(Banker) string
+	VisitCinema(Cinemer) string
 }
 
 type visitor struct{}
 
 // VisitShop ...
-func (v *visitor) VisitShop(s Shop) string {
+func (v *visitor) VisitShop(s Shoper) string {
 	return s.BuyProduct()
 }
 
 // VisitBank ...
-func (v *visitor) VisitBank(b Bank) string {
+func (v *visitor) VisitBank(b Banker) string {
 	return b.SeeBalance()
 }
 
 // VisitCinema ...
-func (v *visitor) VisitCinema(c Cinema) string {
+func (v *visitor) VisitCinema(c Cinemer) string {
 	return c.SeeMovie()
 }
 
