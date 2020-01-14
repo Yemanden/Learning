@@ -1,33 +1,42 @@
 package adapter
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+
+	"github.com/Yemanden/Learning/pkg/adapter/adapter"
+	"github.com/Yemanden/Learning/pkg/adapter/client"
+	"github.com/Yemanden/Learning/pkg/adapter/service"
 )
 
 const (
 	testAdapterPass1Name = "Client to Service"
 	testAdapterPass1Want = "Service!"
+
 	testAdapterPass2Name = "Service to Client"
 	testAdapterPass2Want = "Client!"
+
+	testAdapterServiceInput = "Service!"
+	testAdapterClientInput  = "Client!"
 )
 
 func TestAdapter(t *testing.T) {
-	client := NewClient()
-	service := NewService()
-	adapter := NewAdapter(client, service)
+	cl := client.NewClient(testAdapterClientInput)
+	serv := service.NewService(testAdapterServiceInput)
+	adapt := adapter.NewAdapter(cl, serv)
 
 	t.Run(testAdapterPass1Name, func(t *testing.T) {
-		got := adapter.Request()
 		want := testAdapterPass1Want
+		got := adapt.Request()
 
-		assert.EqualValues(t, got, want)
+		assert.EqualValues(t, want, got)
 	})
 
 	t.Run(testAdapterPass2Name, func(t *testing.T) {
-		got := adapter.SpecificRequest()
 		want := testAdapterPass2Want
+		got := adapt.SpecificRequest()
 
-		assert.EqualValues(t, got, want)
+		assert.EqualValues(t, want, got)
 	})
 }

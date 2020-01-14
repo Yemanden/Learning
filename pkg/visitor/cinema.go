@@ -6,11 +6,13 @@ type Cinema interface {
 	Place
 }
 
-type cinema struct{}
+type cinema struct {
+	film string
+}
 
-// SeeMovie returns string "See Star Wars..."
+// SeeMovie returns string "See " + name of film
 func (c *cinema) SeeMovie() string {
-	return "See \"Star Wars\" "
+	return "See \"" + c.film + "\" "
 }
 
 // Accept ...
@@ -19,6 +21,6 @@ func (c *cinema) Accept(v Visitor) string {
 }
 
 // NewCinema ...
-func NewCinema() Cinema {
-	return &cinema{}
+func NewCinema(film string) Cinema {
+	return &cinema{film}
 }

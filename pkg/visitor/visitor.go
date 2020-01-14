@@ -10,17 +10,17 @@ type Visitor interface {
 type visitor struct{}
 
 // VisitShop ...
-func (v visitor) VisitShop(s Shop) string {
+func (v *visitor) VisitShop(s Shop) string {
 	return s.BuyProduct()
 }
 
 // VisitBank ...
-func (v visitor) VisitBank(b Bank) string {
+func (v *visitor) VisitBank(b Bank) string {
 	return b.SeeBalance()
 }
 
 // VisitCinema ...
-func (v visitor) VisitCinema(c Cinema) string {
+func (v *visitor) VisitCinema(c Cinema) string {
 	return c.SeeMovie()
 }
 

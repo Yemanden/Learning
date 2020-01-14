@@ -6,11 +6,13 @@ type Shop interface {
 	Place
 }
 
-type shop struct{}
+type shop struct {
+	product string
+}
 
 // BuyProduct ...
 func (s *shop) BuyProduct() string {
-	return "Buy one chicken "
+	return "Buy " + s.product + " "
 }
 
 // Accept ...
@@ -19,6 +21,6 @@ func (s *shop) Accept(v Visitor) string {
 }
 
 // NewShop ...
-func NewShop() Shop {
-	return &shop{}
+func NewShop(product string) Shop {
+	return &shop{product}
 }

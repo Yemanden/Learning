@@ -1,14 +1,22 @@
 package adapter
 
+type client interface {
+	Request() string
+}
+
+type service interface {
+	SpecificRequest() string
+}
+
 // Adapter is interface contains interfaces Client and Service
 type Adapter interface {
-	Client
-	Service
+	client
+	service
 }
 
 type adapter struct {
-	client  Client
-	service Service
+	client  client
+	service service
 }
 
 // Request is adaptive method, returns answer from Service
@@ -22,7 +30,7 @@ func (a *adapter) SpecificRequest() string {
 }
 
 // NewAdapter returns a new object, implemented Adapter
-func NewAdapter(c Client, s Service) Adapter {
+func NewAdapter(c client, s service) Adapter {
 	return &adapter{
 		client:  c,
 		service: s,

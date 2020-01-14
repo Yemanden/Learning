@@ -1,16 +1,20 @@
 package visitor
 
+import "fmt"
+
 // Bank ...
 type Bank interface {
 	SeeBalance() string
 	Place
 }
 
-type bank struct{}
+type bank struct {
+	balance int
+}
 
 // SeeBalance ...
 func (b *bank) SeeBalance() string {
-	return "10 dollars "
+	return fmt.Sprintf("%d %s ", b.balance, "dollars")
 }
 
 // Accept ...
@@ -19,6 +23,6 @@ func (b *bank) Accept(v Visitor) string {
 }
 
 // NewBank ...
-func NewBank() Bank {
-	return &bank{}
+func NewBank(balance int) Bank {
+	return &bank{balance}
 }
