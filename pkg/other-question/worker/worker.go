@@ -49,5 +49,5 @@ func workerUsing(ctx context.Context, report chan<- int) {
 
 // NewForeman is constructor, returns "foreman" object that implements the interface Worker
 func NewForeman() Worker {
-	return new(foreman)
+	return &foreman{}
 }
