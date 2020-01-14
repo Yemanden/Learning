@@ -1,4 +1,4 @@
-package questioneleven
+package islands
 
 type depthFirstSearcher interface {
 	dfs([][]byte, coordination)
