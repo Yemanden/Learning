@@ -1,5 +1,7 @@
 package twosum
 
+import "github.com/Yemanden/Learning/pkg/models"
+
 // TwoSummator ...
 type TwoSummator interface {
 	TwoSum([]int, int) ([]int, error)
@@ -16,7 +18,7 @@ func (l *twoSummator) TwoSum(nums []int, target int) ([]int, error) {
 			return []int{i - 1, m[target-nums[i]]}, nil
 		}
 	}
-	return nil, ErrInvalidNumbers
+	return nil, models.InvalidNumbersError
 }
 
 // NewTwoSummator ...

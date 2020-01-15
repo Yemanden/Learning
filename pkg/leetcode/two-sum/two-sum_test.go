@@ -4,6 +4,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"github.com/Yemanden/Learning/pkg/models"
 )
 
 const (
@@ -15,7 +17,7 @@ const (
 )
 
 var (
-	testTwoNumberPass2WantError = ErrInvalidNumbers
+	testTwoNumberPass2WantError = models.InvalidNumbersError
 )
 
 // TestTwoSum ...
