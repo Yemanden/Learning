@@ -1,15 +1,15 @@
 package adapter
 
 import (
-	"github.com/Yemanden/Learning/pkg/patterns/adapter/converter"
-	"github.com/Yemanden/Learning/pkg/patterns/adapter/screen"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
+	"github.com/Yemanden/Learning/pkg/patterns/adapter/converter"
 	elDocument "github.com/Yemanden/Learning/pkg/patterns/adapter/electronic-document"
 	"github.com/Yemanden/Learning/pkg/patterns/adapter/paper-document"
 	"github.com/Yemanden/Learning/pkg/patterns/adapter/reader"
+	"github.com/Yemanden/Learning/pkg/patterns/adapter/screen"
 )
 
 const (
