@@ -3,9 +3,11 @@ package models
 import "errors"
 
 type (
-	SingletonError error
+	AdapterError    error
+  SingletonError  error
 )
 
 var (
-	SellerMissingProductError SingletonError = errors.New("product is missing")
+	DocumentMissingDataError AdapterError     = errors.New("the document is missing data")  	
+  SellerMissingProductError SingletonError  = errors.New("product is missing")
 )
